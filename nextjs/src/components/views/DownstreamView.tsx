@@ -143,7 +143,7 @@ export default function DownstreamView() {
     }
 
     showToast(
-      `Panen ${harvestWeight} kg Jamur Tiram Grade ${harvestGrade} berhasil dicatat! Terjadwal offtake otomatis.`,
+      `Panen ${harvestWeight} kg Jamur Tiram Grade ${harvestGrade} berhasil dicatat dalam log produksi kumbung!`,
       'success'
     );
   };
@@ -152,7 +152,7 @@ export default function DownstreamView() {
     e.preventDefault();
     const ticketId = Math.floor(1000 + Math.random() * 9000);
     showToast(
-      `Tiket garansi tercatat: #${ticketId}. Tim teknis Bio-Hub Lembang akan mengirimkan baglog pengganti gratis setelah verifikasi.`,
+      `Tiket klaim tercatat: #${ticketId}. Tim teknis Bio-Hub Lembang akan memverifikasi pengajuan penggantian substrat sesuai ketentuan kemitraan.`,
       'success'
     );
     setPhotoName('');
@@ -162,17 +162,9 @@ export default function DownstreamView() {
   const handleRequestBuybackPickup = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setShowPickupSuccess(true);
-    if (typeof window !== 'undefined' && (window as any).confetti) {
-      (window as any).confetti({
-        particleCount: 80,
-        spread: 80,
-        origin: { y: 0.6 },
-        colors: ['#059669', '#1B4D3E', '#FBBF24'],
-      });
-    }
     showToast(
-      'Permintaan penjemputan offtake panen berhasil! Armada EV Kang Asep akan tiba pukul 08:30 WIB besok pagi.',
-      'success'
+      'Informasi Kemitraan Tersimpan: Standar kualifikasi cold-chain dan pra-syarat panen Tahun ke-3 telah dicatat untuk kelompok tani Anda.',
+      'info'
     );
   };
 
@@ -214,8 +206,8 @@ export default function DownstreamView() {
               className={`farmer-subnav-link${activeSubTab === 'buyback' ? ' active' : ''}`}
               onClick={() => setActiveSubTab('buyback')}
             >
-              <i className="fa-solid fa-handshake" />
-              <span>Buyback Jamur</span>
+              <i className="fa-solid fa-timeline" />
+              <span>Roadmap Buyback (Th. 3)</span>
             </a>
           </div>
 
@@ -226,7 +218,7 @@ export default function DownstreamView() {
               onClick={() => setShowWarrantyModal(true)}
             >
               <i className="fa-solid fa-shield-virus" />
-              <span>Klaim Garansi 100%</span>
+              <span>Klaim Garansi Substrat</span>
             </button>
             <button
               type="button"
@@ -255,7 +247,7 @@ export default function DownstreamView() {
                 <i className="fa-solid fa-wheat-awn" /> Mitra Downstream Kelompok Tani
               </span>
               <span className="partner-tier-badge emerald-tier">
-                <i className="fa-solid fa-certificate" /> Kelompok Tani Binaan Sirkula • Garansi 100% Tumbuh
+                <i className="fa-solid fa-certificate" /> Kelompok Tani Binaan Sirkula • Garansi Penggantian Substrat
               </span>
             </div>
             <h2 className="profile-name">Kumbung Berkah Jamur — Lembang</h2>
@@ -307,14 +299,14 @@ export default function DownstreamView() {
             footer: <span>Hemat 17% dibanding harga pasaran umum</span>,
           },
           {
-            title: 'Panen Terserap Offtaker',
-            icon: 'fa-handshake',
+            title: 'Roadmap Penyerapan Panen',
+            icon: 'fa-timeline',
             color: 'brown-soft',
-            value: '1.240',
-            unit: 'kg jamur',
+            value: 'Tahun 3',
+            unit: 'Future Development',
             footer: (
-              <span className="text-positive">
-                <i className="fa-solid fa-circle-check" /> 100% Terserap Hotel &amp; Resto Mitra
+              <span style={{ color: '#0F766E', fontWeight: 600 }}>
+                <i className="fa-solid fa-snowflake" /> Sistem Cold-Chain dalam Persiapan
               </span>
             ),
           },
@@ -351,12 +343,13 @@ export default function DownstreamView() {
             </div>
             <div>
               <span className="csh-tag" style={{ color: '#059669' }}>
-                Smart Agri-Sensor Telemetry
+                Monitoring Mikroklimat Berbasis IoT
               </span>
               <h3 className="csh-title">IoT Telemetri Kumbung Jamur Real-Time</h3>
               <p className="csh-subtitle">
-                Pantau mikroklimat kumbung (suhu, kelembapan RH, kadar CO₂, dan cahaya) untuk menjaga
-                tumbuh kembang miselium dan kualitas tudung jamur tiram putih.
+                Monitoring berbasis IoT membantu petani mengambil keputusan budidaya berdasarkan data.
+                Sensor memantau kondisi lingkungan secara terukur seperti suhu, kelembapan (RH), kadar gas CO₂,
+                dan intensitas cahaya untuk mendukung kestabilan mikroklimat kumbung.
               </p>
             </div>
           </div>
@@ -428,17 +421,18 @@ export default function DownstreamView() {
           ))}
         </div>
 
-        {/* Smart Kumbung Automation Panel */}
+        {/* Smart Kumbung Monitoring & Decision Support Panel */}
         <div className="kumbung-automation-panel">
           <div className="kap-left">
             <div className="kap-icon">
-              <i className="fa-solid fa-microchip" />
+              <i className="fa-solid fa-chart-line" />
             </div>
             <div className="kap-text">
-              <h4>Otomasi Smart Misting &amp; Kipas Ventilasi Kumbung</h4>
+              <h4>Monitoring Mikroklimat &amp; Rekomendasi Budidaya Terukur</h4>
               <p>
-                Nozzle kabut air otomatis aktif setiap 4 jam selama 3 menit atau saat kelembapan drop di
-                bawah 80% RH. Ventilasi silent blower menjaga sirkulasi oksigen segar.
+                Monitoring berbasis IoT membantu petani mengambil keputusan budidaya berdasarkan data.
+                Sensor mendeteksi parameter lingkungan dan menyajikan rekomendasi tindakan berkala
+                (pengkabutan manual &amp; sirkulasi ventilasi) guna mengoptimalkan pertumbuhan miselium secara terarah.
               </p>
             </div>
           </div>
@@ -449,26 +443,26 @@ export default function DownstreamView() {
               style={{ background: '#059669', borderColor: '#059669' }}
               onClick={() => {
                 showToast(
-                  'Nozzle Pengkabutan Air Aktif! Menyemprotkan kabut mikro selama 3 menit di Kumbung 1 & 2...',
+                  'Rekomendasi Terkirim: Kondisi kelembapan 86.4% RH optimal. Pengkabutan berkala berikutnya disarankan 2 jam lagi.',
                   'success'
                 );
               }}
             >
-              <i className="fa-solid fa-shower" />
-              <span>Semprot Kabut Air Manual</span>
+              <i className="fa-solid fa-droplet" />
+              <span>Cek Rekomendasi Pengkabutan</span>
             </button>
             <button
               type="button"
               className="btn-subnav-action"
               onClick={() => {
                 showToast(
-                  'Kipas Exhaust Kumbung diaktifkan ke Mode Boost untuk pembuangan akumulasi CO₂.',
+                  'Status Sirkulasi Udara: Aerasi ventilasi kumbung normal (CO₂: 680 ppm). Tidak diperlukan tindakan penyesuaian darurat.',
                   'info'
                 );
               }}
             >
-              <i className="fa-solid fa-fan" />
-              <span>Blower Udara</span>
+              <i className="fa-solid fa-wind" />
+              <span>Evaluasi Sirkulasi Kumbung</span>
             </button>
           </div>
         </div>
@@ -494,8 +488,8 @@ export default function DownstreamView() {
               </span>
               <h3 className="csh-title">Toko Grosir Baglog Bersubsidi Sirkula</h3>
               <p className="csh-subtitle">
-                Media tanam jamur tiram berkualitas tinggi dengan formula ampas kopi 20%. Lebih hemat 17%
-                dibanding harga pasaran umum dengan garansi tumbuh 100%.
+                Media tanam jamur tiram berkualitas tinggi dengan formula ampas kopi 20% dan integrasi
+                monitoring berbasis IoT. Membantu efisiensi modal budidaya petani dengan garansi penggantian substrat.
               </p>
             </div>
           </div>
@@ -555,19 +549,19 @@ export default function DownstreamView() {
                     sub: 'Bebas spora jamur liar & Trichoderma',
                   },
                   {
-                    icon: 'fa-dna',
-                    title: 'Bibit F2 Indukan Florida',
-                    sub: 'Miselium tebal, adaptif dataran sedang-tinggi',
+                    icon: 'fa-microchip',
+                    title: 'Integrasi Monitoring IoT',
+                    sub: 'Sensor memantau suhu, kelembapan & lingkungan secara terukur',
                   },
                   {
                     icon: 'fa-weight-scale',
                     title: 'Bobot Substrat: 1.2 kg',
-                    sub: 'Kadar air pas 60-65%, nutrisi dedak murni',
+                    sub: 'Kadar air terukur 60-65%, nutrisi dedak murni',
                   },
                   {
                     icon: 'fa-shield-virus',
-                    title: 'Garansi 100% Ganti Baru',
-                    sub: 'Klaim langsung jika rusak dalam 14 hari',
+                    title: 'Garansi Penggantian Substrat',
+                    sub: 'Klaim penggantian jika terkontaminasi ≤ 14 hari',
                   },
                 ].map(({ icon, title, sub }) => (
                   <div key={title} className="spec-item">
@@ -660,7 +654,7 @@ export default function DownstreamView() {
                     <span>
                       <i className="fa-solid fa-coins" /> Subsidi Biaya Kirim:
                     </span>
-                    <strong className="text-emerald">Gratis Ongkir (Order &gt; 1.500 pcs)</strong>
+                    <strong className="text-emerald">Subsidi Distribusi (Order &gt; 1.500 pcs)</strong>
                   </div>
                 </div>
               </div>
@@ -701,9 +695,9 @@ export default function DownstreamView() {
             </div>
           </div>
           <div className="csh-right">
-            <a href="#buyback" className="btn-subnav-action btn-subnav-primary" style={{ background: '#059669', borderColor: '#059669' }}>
-              <i className="fa-solid fa-handshake" />
-              <span>Jual Hasil Panen (Buyback)</span>
+            <a href="#buyback" className="btn-subnav-action btn-subnav-primary" style={{ background: '#0F766E', borderColor: '#0F766E' }}>
+              <i className="fa-solid fa-timeline" />
+              <span>Roadmap Buyback (Th. 3)</span>
             </a>
           </div>
         </div>
@@ -970,27 +964,28 @@ export default function DownstreamView() {
       </section>
 
       {/* ========================================================
-          SECTION 4: BUYBACK JAMUR & OFFTAKER GUARANTEE
+          SECTION 4: ROADMAP BUYBACK & COLD-CHAIN LOGISTICS
           ID: buyback (Exact navbar match)
           ======================================================== */}
       <section
         id="buyback"
         className="coffee-portal-section coffee-section-anchor"
-        aria-label="Buyback Jamur dan Jaminan Penyerapan"
+        aria-label="Roadmap Buyback Jamur dan Rantai Dingin"
       >
         <div className="coffee-section-header">
           <div className="csh-left">
             <div className="csh-icon" style={{ background: '#CCFBF1', color: '#0F766E' }}>
-              <i className="fa-solid fa-handshake" />
+              <i className="fa-solid fa-timeline" />
             </div>
             <div>
               <span className="csh-tag" style={{ color: '#0F766E' }}>
-                Guaranteed Offtaker Contract
+                Future Development — Tahun 3
               </span>
-              <h3 className="csh-title">Kontrak Penyerapan Hasil Panen (Buyback Jamur)</h3>
+              <h3 className="csh-title">Roadmap Tahun Ketiga: Mekanisme Buyback &amp; Cold-Chain</h3>
               <p className="csh-subtitle">
-                Sirkula menjamin 100% penyerapan panen jamur tiram putih petani dengan harga beli stabil
-                di atas harga tengkulak untuk disalurkan ke jaringan Horeka &amp; Supermarket.
+                Sirkula berencana mengembangkan mekanisme buyback untuk mengambil kembali produk hasil budidaya tertentu
+                dari mitra petani agar alur ekonomi sirkular berjalan optimal. Layanan ini direncanakan aktif pada Tahun ke-3
+                setelah ekosistem dan kesiapan infrastruktur logistik rantai dingin (cold-chain) terstandarisasi.
               </p>
             </div>
           </div>
@@ -999,13 +994,13 @@ export default function DownstreamView() {
               className="partner-tier-badge"
               style={{ background: '#CCFBF1', color: '#0F766E', border: '1px solid #99F6E4' }}
             >
-              <i className="fa-solid fa-shield-halved" /> Kontrak Terikat: Kuota 3.500 kg / Bulan
+              <i className="fa-solid fa-clock-rotate-left" /> Target Implementasi: Roadmap Tahun 3
             </span>
           </div>
         </div>
 
         <div className="buyback-layout">
-          {/* Contract Showcase Card */}
+          {/* Card 1: Cold-Chain Logistics Specifications */}
           <div className="buyback-contract-card">
             <div className="bcc-header">
               <div>
@@ -1018,7 +1013,7 @@ export default function DownstreamView() {
                     fontWeight: 800,
                   }}
                 >
-                  Kontrak Kemitraan Sirkular Terpadu
+                  Karakteristik Komoditas &amp; Rantai Pasok Khusus
                 </span>
                 <h3
                   style={{
@@ -1028,32 +1023,72 @@ export default function DownstreamView() {
                     marginTop: '0.2rem',
                   }}
                 >
-                  Jaminan Harga Beli Tingkat Petani
+                  Standar Logistik Pasca-Panen Jamur Tiram
                 </h3>
               </div>
-              <span className="bcc-seal-badge">KONTRAK RESMI AKTIF</span>
+              <span className="bcc-seal-badge">COMING IN YEAR 3</span>
             </div>
 
-            <div className="bcc-price-showcase">
-              <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.7)', fontWeight: 700 }}>
-                HARGA PEMBELIAN SIRKULA DI KUMBUNG:
+            <div className="bcc-price-showcase" style={{ background: 'rgba(255, 255, 255, 0.06)' }}>
+              <span style={{ fontSize: '0.75rem', color: '#FCD34D', fontWeight: 700, display: 'block', marginBottom: '0.5rem' }}>
+                <i className="fa-solid fa-triangle-exclamation" /> MENGAPA MEMBUTUHKAN PENANGANAN KHUSUS?
               </span>
-              <div className="bcc-price-row">
-                <span className="bcc-price-num">Rp 15.000</span>
-                <span style={{ fontSize: '1rem', color: '#D1FAE5' }}>/ kg (Grade A Bersih)</span>
-              </div>
-              <span style={{ fontSize: '0.75rem', color: '#FBBF24' }}>
-                ✓ Bebas potongan tengkulak pasar liar (yang sering menekan harga hingga Rp 11.000/kg)
-              </span>
+              <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.9)', lineHeight: 1.55, margin: 0 }}>
+                Jamur tiram merupakan produk segar yang <strong>relatif mudah rusak (perishable)</strong> dengan kadar air tinggi dan laju respirasi cepat. Jamur <strong>tidak dapat diperlakukan seperti barang biasa</strong> dalam proses logistik umum, melainkan membutuhkan protokol rantai pasok khusus yang terkontrol ketat.
+              </p>
             </div>
-
-            <p style={{ fontSize: '0.82rem', color: 'rgba(255, 255, 255, 0.8)', lineHeight: 1.5 }}>
-              Armada EV Sirkula menjemput hasil panen langsung ke kumbung Anda. Pembayaran dicairkan
-              maksimal 1x24 jam langsung ke rekening kelompok tani atau dapat digunakan memotong tagihan
-              tempo baglog.
-            </p>
 
             <div style={{ marginTop: '1.25rem' }}>
+              <span
+                style={{
+                  fontSize: '0.72rem',
+                  color: 'rgba(255, 255, 255, 0.75)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.5px',
+                  fontWeight: 700,
+                  display: 'block',
+                  marginBottom: '0.75rem',
+                }}
+              >
+                4 Kebutuhan Utama dalam Roadmap Buyback:
+              </span>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem' }}>
+                <div style={{ background: 'rgba(255,255,255,0.08)', padding: '0.85rem', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.12)' }}>
+                  <div style={{ color: '#A7F3D0', fontSize: '0.85rem', fontWeight: 700, marginBottom: '0.25rem' }}>
+                    <i className="fa-solid fa-box-open" /> 1. Packaging Khusus
+                  </div>
+                  <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.8)', lineHeight: 1.4, display: 'block' }}>
+                    Kemasan berpori mikro (micro-perforated) food-grade untuk respirasi tanpa kondensasi air.
+                  </span>
+                </div>
+                <div style={{ background: 'rgba(255,255,255,0.08)', padding: '0.85rem', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.12)' }}>
+                  <div style={{ color: '#A7F3D0', fontSize: '0.85rem', fontWeight: 700, marginBottom: '0.25rem' }}>
+                    <i className="fa-solid fa-snowflake" /> 2. Box Kontrol Suhu
+                  </div>
+                  <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.8)', lineHeight: 1.4, display: 'block' }}>
+                    Container atau insulated thermal box berlapis untuk menjaga kestabilan temperatur produk.
+                  </span>
+                </div>
+                <div style={{ background: 'rgba(255,255,255,0.08)', padding: '0.85rem', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.12)' }}>
+                  <div style={{ color: '#A7F3D0', fontSize: '0.85rem', fontWeight: 700, marginBottom: '0.25rem' }}>
+                    <i className="fa-solid fa-temperature-arrow-down" /> 3. Cold-Chain Terpadu
+                  </div>
+                  <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.8)', lineHeight: 1.4, display: 'block' }}>
+                    Sistem pendinginan konsisten (2°C - 5°C) sepanjang jalur pengangkutan hingga buyer akhir.
+                  </span>
+                </div>
+                <div style={{ background: 'rgba(255,255,255,0.08)', padding: '0.85rem', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.12)' }}>
+                  <div style={{ color: '#A7F3D0', fontSize: '0.85rem', fontWeight: 700, marginBottom: '0.25rem' }}>
+                    <i className="fa-solid fa-stopwatch" /> 4. Waktu Tempuh Terkontrol
+                  </div>
+                  <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.8)', lineHeight: 1.4, display: 'block' }}>
+                    Manajemen rute distribusi ketat pasca-panen subuh untuk mempertahankan kesegaran tudung jamur.
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
               <span
                 style={{
                   fontSize: '0.72rem',
@@ -1063,92 +1098,178 @@ export default function DownstreamView() {
                   fontWeight: 700,
                 }}
               >
-                Jaringan Klien Buyer Penyerap Hasil Panen Anda:
+                Rencana Saluran Offtaker Penyerapan (Tahun 3):
               </span>
               <div className="bcc-buyers-list">
                 <span className="bcc-buyer-chip">
-                  <i className="fa-solid fa-hotel" /> All Sedayu Hotel Group
+                  <i className="fa-solid fa-hotel" /> Jaringan Hotel &amp; Restoran (Horeka)
                 </span>
                 <span className="bcc-buyer-chip">
-                  <i className="fa-solid fa-utensils" /> Dapur Sunda Lembang
+                  <i className="fa-solid fa-cart-shopping" /> Supermarket Modern &amp; Retail Segar
                 </span>
                 <span className="bcc-buyer-chip">
-                  <i className="fa-solid fa-cart-shopping" /> Super Indo Segar Bandung
-                </span>
-                <span className="bcc-buyer-chip">
-                  <i className="fa-solid fa-bowl-food" /> Pabrik Keripik Jamur Crispy
+                  <i className="fa-solid fa-industry" /> Industri Pangan Olahan Jamur
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Request Offtake Pickup Form */}
+          {/* Card 2: 3-Year Roadmap Visualization */}
           <div className="buyback-pickup-form-card">
-            <h4
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem', paddingBottom: '0.75rem', borderBottom: '1px solid var(--slate-200)' }}>
+              <div>
+                <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#0F766E', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  Roadmap Strategis Sirkula
+                </span>
+                <h4
+                  style={{
+                    fontSize: '1.15rem',
+                    fontWeight: 800,
+                    color: '#0F172A',
+                    marginTop: '0.15rem',
+                  }}
+                >
+                  Tahapan Perkembangan Rantai Sirkular
+                </h4>
+              </div>
+              <span
+                style={{
+                  fontSize: '0.72rem',
+                  fontWeight: 800,
+                  background: '#ECFDF5',
+                  color: '#047857',
+                  border: '1px solid #A7F3D0',
+                  padding: '0.25rem 0.65rem',
+                  borderRadius: '20px',
+                }}
+              >
+                Fase 1 Aktif
+              </span>
+            </div>
+
+            {/* Timeline Year 1, Year 2, Year 3 */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
+              {/* Year 1 */}
+              <div
+                style={{
+                  padding: '0.9rem 1rem',
+                  borderRadius: '12px',
+                  background: '#F0FDF4',
+                  border: '1.5px solid #86EFAC',
+                  position: 'relative',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
+                  <strong style={{ fontSize: '0.85rem', color: '#166534', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <i className="fa-solid fa-circle-check text-emerald" /> YEAR 1 — Pondasi &amp; Ekosistem
+                  </strong>
+                  <span style={{ fontSize: '0.68rem', fontWeight: 800, background: '#DCFCE7', color: '#15803D', padding: '0.15rem 0.5rem', borderRadius: '4px' }}>
+                    Fase Berjalan
+                  </span>
+                </div>
+                <ul style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.78rem', color: '#1E3A2F', lineHeight: 1.5 }}>
+                  <li>Pembangunan ekosistem terpadu kedai kopi &amp; petani</li>
+                  <li>Digitalisasi rantai pasok ampas kopi &amp; baglog</li>
+                  <li>IoT monitoring kondisi mikroklimat kumbung</li>
+                  <li>Pembentukan mitra dan standardisasi formulasi substrat</li>
+                </ul>
+              </div>
+
+              {/* Year 2 */}
+              <div
+                style={{
+                  padding: '0.9rem 1rem',
+                  borderRadius: '12px',
+                  background: '#F8FAFC',
+                  border: '1px solid var(--slate-200)',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
+                  <strong style={{ fontSize: '0.85rem', color: '#334155', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <i className="fa-solid fa-circle-notch text-blue" /> YEAR 2 — Scale-Up &amp; Optimalisasi
+                  </strong>
+                  <span style={{ fontSize: '0.68rem', fontWeight: 700, background: '#F1F5F9', color: '#64748B', padding: '0.15rem 0.5rem', borderRadius: '4px' }}>
+                    Fase Konsolidasi
+                  </span>
+                </div>
+                <ul style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.78rem', color: '#475569', lineHeight: 1.5 }}>
+                  <li>Scale-up kapasitas fasilitas Bio-Hub</li>
+                  <li>Optimalisasi operasional proses sterilisasi &amp; produksi</li>
+                  <li>Perluasan jaringan kemitraan wilayah Jawa Barat</li>
+                  <li>Peningkatan efisiensi rute dan transisi armada distribusi</li>
+                </ul>
+              </div>
+
+              {/* Year 3 */}
+              <div
+                style={{
+                  padding: '0.9rem 1rem',
+                  borderRadius: '12px',
+                  background: '#F0FDFA',
+                  border: '1.5px solid #99F6E4',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
+                  <strong style={{ fontSize: '0.85rem', color: '#0F766E', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <i className="fa-solid fa-snowflake" style={{ color: '#0D9488' }} /> YEAR 3 — Sistem Buyback &amp; Cold-Chain
+                  </strong>
+                  <span style={{ fontSize: '0.68rem', fontWeight: 800, background: '#CCFBF1', color: '#0F766E', padding: '0.15rem 0.5rem', borderRadius: '4px' }}>
+                    Future Development
+                  </span>
+                </div>
+                <ul style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.78rem', color: '#134E4A', lineHeight: 1.5 }}>
+                  <li>Pengembangan sistem buyback hasil budidaya petani mitra</li>
+                  <li>Penerapan reverse logistics terintegrasi</li>
+                  <li>Infrastruktur cold-chain packaging &amp; box suhu terkontrol</li>
+                  <li>Penguatan circular economy closed-loop secara utuh</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Informational Guidance Notice */}
+            <div
               style={{
-                fontSize: '1.05rem',
-                fontWeight: 800,
-                color: '#0F172A',
-                marginBottom: '1rem',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
+                marginTop: '1.25rem',
+                padding: '0.85rem',
+                borderRadius: '10px',
+                background: '#FFFBEB',
+                border: '1px solid #FDE68A',
+                fontSize: '0.75rem',
+                color: '#92400E',
+                lineHeight: 1.5,
               }}
             >
-              <i className="fa-solid fa-truck" style={{ color: '#059669' }} /> Ajukan Penjemputan
-              Panen Segar
-            </h4>
-            <form onSubmit={handleRequestBuybackPickup} className="interactive-form">
-              <div className="form-group">
-                <label className="form-label">Tanggal Siap Jemput</label>
-                <input
-                  type="date"
-                  required
-                  defaultValue={getTodayString()}
-                  className="form-control"
-                />
-              </div>
+              <i className="fa-solid fa-circle-info" style={{ marginRight: '0.4rem', color: '#D97706' }} />
+              <strong>Pemberitahuan Kemitraan:</strong> Sistem penyerapan panen (buyback) bukan layanan aktif saat ini. Tim Sirkula saat ini fokus pada pembinaan budidaya dan validasi cold-chain agar pada Tahun 3 komoditas jamur tiram dapat diserap dengan kualitas optimal.
+            </div>
 
-              <div className="form-group">
-                <label className="form-label">Estimasi Berat Panen (kg)</label>
-                <input
-                  type="number"
-                  min={10}
-                  max={2000}
-                  defaultValue={50}
-                  required
-                  className="form-control"
-                />
-                <small className="form-help">Minimal penjemputan armada adalah 25 kg jamur tiram.</small>
-              </div>
-
-              <div className="form-group">
-                <label className="form-label">Pilihan Kemasan di Kumbung</label>
-                <select className="form-control" defaultValue="krat">
-                  <option value="krat">Krat Plastik Sirkula 10 kg (Disediakan Kurir)</option>
-                  <option value="plastik">Kantung Plastik Bening Tebal 5 kg</option>
-                  <option value="curah">Kotak Kayu Curah Petani</option>
-                </select>
-              </div>
-
-              <div className="form-group">
-                <label className="form-label">Catatan Tambahan untuk Driver EV</label>
-                <textarea
-                  rows={2}
-                  defaultValue="Panen dipetik subuh pukul 05:30 WIB, siap di timbang di depan kumbung 1."
-                  className="form-control"
-                />
-              </div>
-
+            <div style={{ marginTop: '1.25rem' }}>
               <button
-                type="submit"
+                type="button"
                 className="btn-subnav-action btn-subnav-primary"
-                style={{ width: '100%', padding: '0.75rem', background: '#059669', borderColor: '#059669' }}
+                style={{
+                  width: '100%',
+                  padding: '0.85rem',
+                  background: '#0F766E',
+                  borderColor: '#0F766E',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.5rem',
+                  fontSize: '0.85rem',
+                  borderRadius: '10px',
+                }}
+                onClick={() =>
+                  showToast(
+                    'Informasi Roadmap Kemitraan: Standar kualifikasi mutu panen dan cold-chain Tahun 3 akan disosialisasikan secara bertahap kepada kelompok tani binaan.',
+                    'info'
+                  )
+                }
               >
-                <i className="fa-solid fa-paper-plane" />
-                <span>Kirim Permintaan Penjemputan Panen</span>
+                <i className="fa-solid fa-file-circle-check" />
+                <span>Pelajari Kriteria Kualifikasi Panen Tahun 3</span>
               </button>
-            </form>
+            </div>
           </div>
         </div>
       </section>
@@ -1248,7 +1369,7 @@ export default function DownstreamView() {
       )}
 
       {/* ========================================================
-          MODAL 2: KLAIM GARANSI 100% GANTI BARU
+          MODAL 2: KLAIM GARANSI PENGGANTIAN SUBSTRAT
           ======================================================== */}
       {showWarrantyModal && (
         <div
@@ -1263,7 +1384,7 @@ export default function DownstreamView() {
             <div className="cmd-header">
               <h3 className="cmd-title">
                 <i className="fa-solid fa-shield-virus" style={{ color: '#DC2626' }} /> Klaim
-                Garansi 100% Ganti Baru
+                Garansi Penggantian Substrat
               </h3>
               <button
                 type="button"

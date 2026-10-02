@@ -60,7 +60,7 @@ export default function CheckoutModal() {
             </div>
             <div className="checkout-guarantee-note">
               <i className="fa-solid fa-shield-check" />
-              <span>Pesanan Anda dilindungi <strong>Garansi 100% Ganti Baru</strong> bila miselium tidak merambat aktif dalam 14 hari pasca serah terima.</span>
+              <span>Pesanan Anda dilindungi <strong>Garansi Penggantian Substrat</strong> bila miselium tidak merambat aktif dalam 14 hari pasca serah terima sesuai ketentuan kemitraan.</span>
             </div>
           </div>
           <div className="modal-footer">

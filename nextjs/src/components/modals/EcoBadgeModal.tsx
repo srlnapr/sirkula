@@ -79,7 +79,7 @@ export default function EcoBadgeModal() {
                 <span className="qr-caption">Pindai untuk verifikasi jejak karbon resmi di <strong>sirkula.id/verify/SRK-0881</strong></span>
               </div>
               <div className="eco-sdg-row">
-                <span className="sdg-pill-mini" style={{ background: '#059669', color: 'white' }}><i className="fa-solid fa-leaf" /> Zero-Waste Coffee</span>
+                <span className="sdg-pill-mini" style={{ background: '#059669', color: 'white' }}><i className="fa-solid fa-leaf" /> Circular Coffee Partner</span>
                 <span className="sdg-pill-mini" style={{ background: '#6F4E37', color: 'white' }}><i className="fa-solid fa-seedling" /> Dukung Petani Lokal</span>
               </div>
             </div>

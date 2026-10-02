@@ -122,7 +122,7 @@ const REWARD_CATALOG: RewardItem[] = [
     points: 1500,
     icon: 'fa-glass-water',
     badge: 'Kemasan Hijau',
-    desc: 'Cup take-away 12oz ramah lingkungan berbahan komposit spent coffee grounds (SCG) yang dapat terurai 100% dalam tanah.',
+    desc: 'Cup take-away 12oz ramah lingkungan berbahan komposit spent coffee grounds (SCG) yang dirancang untuk terurai secara hayati (biodegradable) dalam tanah.',
     stock: 8,
     value: 'Rp 310.000',
   },
@@ -778,11 +778,10 @@ export default function UpstreamView() {
               <i className="fa-solid fa-truck-fast" />
             </div>
             <div>
-              <span className="csh-tag">Logistik Sirkular Ramah Lingkungan</span>
-              <h3 className="csh-title">Panggil Kurir EV &amp; Jadwalkan Penjemputan</h3>
+              <span className="csh-tag">Distribusi Berkelanjutan Bertahap</span>
+              <h3 className="csh-title">Panggil Kurir &amp; Jadwalkan Penjemputan</h3>
               <p className="csh-subtitle">
-                Armada motor listrik (EV) Sirkula akan menjemput ampas kopi langsung ke bar kedai
-                Anda dengan timbangan Bluetooth presisi.
+                Distribusi bertahap menggunakan kendaraan listrik sebagai bagian dari upaya menekan emisi dan meningkatkan efisiensi operasional.
               </p>
             </div>
           </div>
@@ -802,10 +801,25 @@ export default function UpstreamView() {
                 <div>
                   <h3 className="card-title">Jadwalkan Penjemputan Ampas Kopi</h3>
                   <p className="card-subtitle">
-                    Penjemputan gratis untuk kedai mitra (min. 10 kg ampas tiris)
+                    Penjemputan terjadwal untuk kedai mitra (min. 10 kg ampas tiris)
                   </p>
                 </div>
               </div>
+            </div>
+            <div
+              style={{
+                margin: '0 1.5rem 1rem',
+                padding: '0.75rem 0.9rem',
+                background: '#FAF5EE',
+                border: '1px solid #E6D5C3',
+                borderRadius: '8px',
+                fontSize: '0.75rem',
+                color: '#6F4E37',
+                lineHeight: 1.45,
+              }}
+            >
+              <i className="fa-solid fa-circle-info" style={{ marginRight: '0.4rem', color: '#B08968' }} />
+              <strong>Transisi Armada EV:</strong> Penggunaan kendaraan listrik dijalankan secara bertahap dengan mempertimbangkan biaya pengadaan armada, biaya charging/listrik, pemeliharaan berkala (maintenance), serta kesiapan infrastruktur charging.
             </div>
             <form id="pickupForm" onSubmit={handleSchedulePickup} className="interactive-form">
               <div className="form-row">
@@ -949,7 +963,7 @@ export default function UpstreamView() {
                     Kang Rahmat (Kurir EV)
                   </strong>
                   <span style={{ fontSize: '0.72rem', color: '#64748B' }}>
-                    Motor Listrik Selis B-1492-SRK • Rating 4.9 ★
+                    Armada Listrik Uji Efisiensi Rute • Rating 4.9 ★
                   </span>
                 </div>
               </div>
@@ -1110,7 +1124,7 @@ export default function UpstreamView() {
               <span className="rhc-balance-unit">Eco-Points Tersedia</span>
             </div>
             <p className="rhc-desc">
-              Poin diakumulasikan otomatis setiap kali armada EV menimbang ampas kopi di bar Anda.
+              Poin diakumulasikan setiap kali armada logistik menimbang ampas kopi terverifikasi di bar Anda.
               Poin tidak pernah hangus selama kemitraan aktif.
             </p>
           </div>
@@ -1292,11 +1306,11 @@ export default function UpstreamView() {
               <span className="ecf-awarded-to">Sertifikat Resmi Kemitraan Sirkular Diberikan Kepada:</span>
               <h2 className="ecf-partner-name">Kopi Titik Koma (Sudirman Hub)</h2>
               <h4 className="ecf-title-main">
-                Green Partner: Zero Spent Coffee Ground to Landfill
+                Green Partner: Pengalihan Residu Ampas Kopi dari TPA
               </h4>
               <p className="ecf-description">
                 Telah berkontribusi nyata dalam transisi ekonomi sirkular Indonesia melalui
-                pemilahan ampas kopi 100% murni untuk diproses menjadi baglog media tanam jamur
+                pemilahan ampas kopi murni tanpa kontaminan anorganik untuk diproses menjadi baglog media tanam jamur
                 tiram di Bio-Hub Lembang.
               </p>
             </div>
@@ -1594,8 +1608,8 @@ export default function UpstreamView() {
                 </div>
               </div>
               <p style={{ fontSize: '0.78rem', color: '#475569', lineHeight: 1.5 }}>
-                Sertifikat ini membuktikan komitmen kedai kopi dalam mewujudkan sistem tanpa limbah
-                (zero-waste) dan mendukung kesejahteraan petani jamur lokal binaan Sirkula.
+                Sertifikat ini membuktikan komitmen kedai kopi dalam mewujudkan sistem minim limbah
+                menuju ekonomi sirkular dan mendukung kesejahteraan petani jamur lokal binaan Sirkula.
               </p>
             </div>
             <div style={{ display: 'flex', gap: '0.75rem' }}>
@@ -1675,7 +1689,7 @@ export default function UpstreamView() {
                 />
               </div>
               <p style={{ fontSize: '0.75rem', color: '#059669' }}>
-                ✓ Gratis biaya peminjaman wadah untuk mitra aktif Sirkula.
+                ✓ Subsidi fasilitas wadah kedap udara untuk mitra aktif Sirkula.
               </p>
               <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem' }}>
                 <button

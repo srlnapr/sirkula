@@ -25,7 +25,7 @@
   <!-- ==================== TOP NAVIGATION BAR ==================== -->
   <header class="top-nav" id="topNav">
     <div class="nav-container">
-      <!-- Brand & SDG Badges -->
+      <!-- Brand Logo -->
       <div class="brand-section">
         <a href="#landing" class="brand-logo" onclick="switchRole('landing'); return false;" id="brandHomeLink">
           <div class="logo-icon-wrap">
@@ -39,145 +39,137 @@
         </a>
       </div>
 
-      <!-- STRICTLY ROLE-CONDITIONAL NAVIGATION BARS -->
+      <!-- STRICTLY ROLE-CONDITIONAL NAVIGATION BARS (Desktop Pill Links) -->
       <!-- 1. Landing Nav -->
       <nav class="role-nav-group" id="navGroupLanding">
-        <a href="#circular-flow" class="role-nav-link"><i class="fa-solid fa-arrows-spin"></i> Alur Sirkular</a>
-        <a href="#impact-simulator" class="role-nav-link"><i class="fa-solid fa-calculator"></i> Kalkulator Dampak</a>
-        <a href="#market-validation" class="role-nav-link"><i class="fa-solid fa-chart-line"></i> Validasi Pasar</a>
-        <a href="#biohub" class="role-nav-link"><i class="fa-solid fa-microchip"></i> BioHub Central</a>
+        <a href="#circular-flow" class="role-nav-link" onclick="navigateToSection('circular-flow'); return false;"><i class="fa-solid fa-arrows-spin"></i> Alur Sirkular</a>
+        <a href="#impact-simulator" class="role-nav-link" onclick="navigateToSection('impact-simulator'); return false;"><i class="fa-solid fa-calculator"></i> Kalkulator Formula</a>
+        <a href="#mvp-digital" class="role-nav-link" onclick="navigateToSection('mvp-digital'); return false;"><i class="fa-solid fa-laptop-code"></i> Fitur Unggulan</a>
+        <a href="#statsRibbon" class="role-nav-link" onclick="navigateToSection('statsRibbon'); return false;"><i class="fa-solid fa-chart-line"></i> Metrik Ekosistem</a>
       </nav>
 
       <!-- 2. Upstream Cafe Nav (Hidden by default, shown when role === 'upstream') -->
       <nav class="role-nav-group" id="navGroupUpstream" style="display: none;">
-        <span class="role-portal-tag upstream"><i class="fa-solid fa-mug-hot"></i> Portal Kedai Kopi</span>
-        <a href="#upstream-waste" class="role-nav-link"><i class="fa-solid fa-trash-can"></i> Wadah Ampas</a>
-        <a href="#pickup-schedule" class="role-nav-link"><i class="fa-solid fa-truck"></i> Panggil Kurir</a>
-        <a href="#rewards" class="role-nav-link"><i class="fa-solid fa-coins"></i> Eco-Points</a>
-        <a href="#esg" class="role-nav-link"><i class="fa-solid fa-award"></i> Sertifikat ESG</a>
+        <a href="#pickup" class="role-nav-link" onclick="switchCafeTab('pickup'); navigateToSection('cafeTabPickup'); return false;"><i class="fa-solid fa-truck-fast"></i> Penjemputan EV</a>
+        <a href="#bins" class="role-nav-link" onclick="switchCafeTab('bins'); navigateToSection('cafeTabBins'); return false;"><i class="fa-solid fa-trash-can"></i> Wadah Ampas</a>
+        <a href="#rewards" class="role-nav-link" onclick="switchCafeTab('rewards'); navigateToSection('cafeTabRewards'); return false;"><i class="fa-solid fa-coins"></i> Eco-Points</a>
+        <a href="#esg" class="role-nav-link" onclick="switchCafeTab('esg'); navigateToSection('cafeTabEsg'); return false;"><i class="fa-solid fa-award"></i> Portofolio ESG</a>
       </nav>
 
       <!-- 3. Downstream Mushroom Nav (Hidden by default, shown when role === 'downstream') -->
       <nav class="role-nav-group" id="navGroupDownstream" style="display: none;">
-        <span class="role-portal-tag downstream"><i class="fa-solid fa-seedling"></i> Portal Petani Jamur</span>
-        <a href="#iot-telemetry" class="role-nav-link"><i class="fa-solid fa-temperature-half"></i> IoT Kumbung</a>
-        <a href="#marketplace" class="role-nav-link"><i class="fa-solid fa-box"></i> Pesan Baglog</a>
-        <a href="#harvest-log" class="role-nav-link"><i class="fa-solid fa-scale-balanced"></i> Catat Panen</a>
-        <a href="#buyback" class="role-nav-link"><i class="fa-solid fa-handshake"></i> Buyback Sirkula</a>
+        <a href="#marketplace" class="role-nav-link" onclick="switchFarmerTab('store'); navigateToSection('baglogStoreSection'); return false;"><i class="fa-solid fa-box"></i> Pesan Baglog</a>
+        <a href="#harvest-log" class="role-nav-link" onclick="switchFarmerTab('calc'); navigateToSection('farmerTabCalc'); return false;"><i class="fa-solid fa-scale-balanced"></i> Kalkulator Panen</a>
+        <a href="#iot-telemetry" class="role-nav-link" onclick="switchFarmerTab('iot'); navigateToSection('farmerTabIot'); return false;"><i class="fa-solid fa-temperature-half"></i> IoT Kumbung</a>
+        <a href="#buyback" class="role-nav-link" onclick="switchFarmerTab('buyback'); navigateToSection('farmerTabBuyback'); return false;"><i class="fa-solid fa-timeline"></i> Roadmap Th. 3</a>
       </nav>
 
       <!-- 4. BioHub Ops Nav (Hidden by default, shown when role === 'biohub') -->
       <nav class="role-nav-group" id="navGroupBiohub" style="display: none;">
-        <span class="role-portal-tag biohub"><i class="fa-solid fa-microchip"></i> BioHub Command</span>
-        <a href="#fleet-map" class="role-nav-link"><i class="fa-solid fa-map-location-dot"></i> Radar Armada EV</a>
-        <a href="#reactor" class="role-nav-link"><i class="fa-solid fa-fire"></i> Reaktor Kiln</a>
-        <a href="#qa-lab" class="role-nav-link"><i class="fa-solid fa-shield-halved"></i> Lab QA</a>
-        <a href="#esg-balance" class="role-nav-link"><i class="fa-solid fa-chart-pie"></i> Neraca Sirkular</a>
+        <a href="#fleet-map" class="role-nav-link" onclick="navigateToSection('fleet-map'); return false;"><i class="fa-solid fa-truck-fast"></i> Antrian Armada</a>
+        <a href="#reactor" class="role-nav-link" onclick="navigateToSection('reactor'); return false;"><i class="fa-solid fa-fire"></i> Reaktor Kiln</a>
+        <a href="#qa-lab" class="role-nav-link" onclick="navigateToSection('qa-lab'); return false;"><i class="fa-solid fa-boxes-packing"></i> Distribusi Baglog</a>
+        <a href="#esg-balance" class="role-nav-link" onclick="navigateToSection('esg-balance'); return false;"><i class="fa-solid fa-chart-pie"></i> Neraca Fasilitas</a>
       </nav>
 
-      <!-- Quick Action Notification & Auth Widget -->
+      <!-- Quick Action Notification, Auth Widget & Mobile Hamburger -->
       <div class="nav-actions">
         <button class="btn-notification" id="btnNotification" title="Notifikasi Sistem" onclick="showToast('Semua sistem Sirkula berjalan normal (Server Operational)', 'info')">
           <i class="fa-regular fa-bell"></i>
           <span class="notif-badge">3</span>
         </button>
 
-        <!-- AUTH WIDGET: Not Logged In -->
-        <button class="btn-auth-login" id="btnAuthLogin" onclick="openAuthPage('masuk')">
-          <i class="fa-solid fa-right-to-bracket"></i>
-          <span>Masuk / Demo Login</span>
-        </button>
-
-        <!-- AUTH WIDGET: Logged In (hidden by default) -->
-        <div class="auth-user-pill" id="authUserPill" style="display:none;">
-          <div class="auth-avatar" id="authAvatar">K</div>
+        <!-- AUTH & DEMO ROLE SWITCHER PILL (TOP NAVBAR) -->
+        <div class="auth-user-pill" id="authUserPill" onclick="toggleAuthMenu()" title="Klik untuk ganti peran demo Sirkula">
+          <div class="auth-avatar" id="authAvatar">S</div>
           <div class="auth-info" id="authInfo">
-            <span class="auth-name" id="authName">Kopi Titik Koma</span>
-            <span class="auth-role-tag" id="authRoleTag">Upstream</span>
+            <span class="auth-name" id="authName">Overview Publik</span>
+            <span class="auth-role-tag tag-landing" id="authRoleTag">Demo Peran</span>
           </div>
-          <button class="auth-menu-btn" id="authMenuBtn" onclick="toggleAuthMenu()" title="Opsi Akun">
+          <button class="auth-menu-btn" id="authMenuBtn" type="button" title="Ganti Peran Demo">
             <i class="fa-solid fa-chevron-down"></i>
           </button>
-          <!-- Dropdown -->
-          <div class="auth-dropdown" id="authDropdown">
+
+          <!-- Dropdown Menu -->
+          <div class="auth-dropdown" id="authDropdown" onclick="event.stopPropagation()">
             <div class="auth-dropdown-header">
-              <i class="fa-solid fa-user-circle"></i>
-              <span id="authDropdownName">Kopi Titik Koma</span>
+              <i class="fa-solid fa-circle-user"></i>
+              <div style="line-height:1.2;">
+                <strong id="authDropdownName" style="display:block; font-size:0.88rem; color:#0f172a;">Overview Publik</strong>
+                <small id="authDropdownSub" style="color:#64748b; font-size:0.75rem;">Ekosistem Sirkula Terbuka</small>
+              </div>
             </div>
             <hr class="auth-dropdown-divider">
-            <div class="auth-dropdown-section-label">Ganti Peran Demo</div>
-            <button class="auth-dropdown-item" onclick="quickLoginAs('upstream')">
-              <i class="fa-solid fa-mug-saucer"></i> Mitra Kedai Kopi
+            <div class="auth-dropdown-section-label">Pilih Peran Demo Sirkula</div>
+            <button class="auth-dropdown-item active" id="menuItemLanding" onclick="switchRole('landing'); closeAuthDropdown();">
+              <i class="fa-solid fa-globe"></i>
+              <div class="auth-item-copy">
+                <strong>Overview Publik</strong>
+                <small>Halaman utama &amp; roadmap 3 tahun</small>
+              </div>
             </button>
-            <button class="auth-dropdown-item" onclick="quickLoginAs('downstream')">
-              <i class="fa-solid fa-seedling"></i> Mitra Petani Jamur
+            <button class="auth-dropdown-item" id="menuItemUpstream" onclick="quickLoginAs('upstream')">
+              <i class="fa-solid fa-mug-saucer"></i>
+              <div class="auth-item-copy">
+                <strong>Mitra Kedai Kopi</strong>
+                <small>Upstream • Penjemputan &amp; sertifikat ESG</small>
+              </div>
             </button>
-            <button class="auth-dropdown-item" onclick="quickLoginAs('biohub')">
-              <i class="fa-solid fa-flask"></i> Operator Bio-Hub
+            <button class="auth-dropdown-item" id="menuItemDownstream" onclick="quickLoginAs('downstream')">
+              <i class="fa-solid fa-seedling"></i>
+              <div class="auth-item-copy">
+                <strong>Mitra Petani Jamur</strong>
+                <small>Downstream • Grosir baglog &amp; IoT</small>
+              </div>
+            </button>
+            <button class="auth-dropdown-item" id="menuItemBiohub" onclick="quickLoginAs('biohub')">
+              <i class="fa-solid fa-microchip"></i>
+              <div class="auth-item-copy">
+                <strong>Operator Bio-Hub</strong>
+                <small>Command center • Sterilisasi &amp; QA Lab</small>
+              </div>
             </button>
             <hr class="auth-dropdown-divider">
+            <div class="auth-dropdown-section-label">Akses Platform</div>
+            <button class="auth-dropdown-item" onclick="openAuthPage('masuk'); closeAuthDropdown();">
+              <i class="fa-solid fa-right-to-bracket"></i> Masuk / Daftar Akun
+            </button>
             <button class="auth-dropdown-item auth-logout" onclick="handleLogout()">
-              <i class="fa-solid fa-right-from-bracket"></i> Keluar
+              <i class="fa-solid fa-rotate-left"></i> Reset ke Publik
             </button>
           </div>
         </div>
+
+        <!-- Mobile Navigation Hamburger Button -->
+        <button class="btn-mobile-nav" id="btnMobileNav" onclick="toggleMobileNav()" aria-label="Buka Menu" title="Menu Navigasi">
+          <i class="fa-solid fa-bars" id="mobileNavIcon"></i>
+        </button>
       </div>
     </div>
 
-    <!-- Quick Stats Ribbon (Interactive Real-time Telemetry) -->
-    <div class="stats-ribbon" id="statsRibbon">
-      <div class="ribbon-inner">
-        <div class="ribbon-item">
-          <div class="ribbon-icon coffee-stat">
-            <i class="fa-solid fa-weight-hanging"></i>
-          </div>
-          <div class="ribbon-meta">
-            <span class="ribbon-label">Ampas Kopi Dikelola</span>
-            <div class="ribbon-val-group">
-              <span class="ribbon-value" id="ribbonCoffeeKg">14.850</span>
-              <span class="ribbon-unit">kg</span>
-              <span class="ribbon-trend"><i class="fa-solid fa-arrow-trend-up"></i> +12% bln ini</span>
-            </div>
-          </div>
+    <!-- Responsive Mobile Navigation Drawer (Dropdown on < 992px) -->
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+      <div class="mobile-nav-inner">
+        <div class="mobile-nav-section-title">Menu Navigasi (<span id="mobileRoleLabel">Publik</span>)</div>
+        <div class="mobile-links-grid" id="mobileLinksGrid">
+          <!-- Populated or synced dynamically based on active role -->
         </div>
 
-        <div class="ribbon-divider"></div>
-
-        <div class="ribbon-item">
-          <div class="ribbon-icon baglog-stat">
-            <i class="fa-solid fa-box-archive"></i>
-          </div>
-          <div class="ribbon-meta">
-            <span class="ribbon-label">Baglog Jamur Terdistribusi</span>
-            <div class="ribbon-val-group">
-              <span class="ribbon-value" id="ribbonBaglogCount">42.600</span>
-              <span class="ribbon-unit">unit</span>
-              <span class="ribbon-subtag">Ke 38 Kumbung</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="ribbon-divider"></div>
-
-        <div class="ribbon-item">
-          <div class="ribbon-icon ch4-stat">
-            <i class="fa-solid fa-cloud-arrow-down"></i>
-          </div>
-          <div class="ribbon-meta">
-            <span class="ribbon-label">Emisi Metana (CH₄) Dicegah</span>
-            <div class="ribbon-val-group">
-              <span class="ribbon-value" id="ribbonCh4Kg">28.215</span>
-              <span class="ribbon-unit">kg CO₂e</span>
-              <span class="ribbon-subtag badge-green">Zero-Landfill Impact</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="ribbon-divider"></div>
-
-        <div class="ribbon-item ribbon-live-status">
-          <span class="live-pulse"></span>
-          <span class="live-text">Bio-Hub Lembang: <strong>Aktif Sterilisasi Batch #88</strong></span>
+        <div class="mobile-roles-divider"></div>
+        <div class="mobile-nav-section-title">Ganti Peran Cepat:</div>
+        <div class="mobile-role-chips">
+          <button class="m-role-chip active" id="mChipLanding" onclick="switchRole('landing'); closeMobileNav();">
+            <i class="fa-solid fa-globe"></i> Publik
+          </button>
+          <button class="m-role-chip" id="mChipUpstream" onclick="switchRole('upstream'); closeMobileNav();">
+            <i class="fa-solid fa-mug-saucer"></i> Kedai Kopi
+          </button>
+          <button class="m-role-chip" id="mChipDownstream" onclick="switchRole('downstream'); closeMobileNav();">
+            <i class="fa-solid fa-seedling"></i> Petani Jamur
+          </button>
+          <button class="m-role-chip" id="mChipBiohub" onclick="switchRole('biohub'); closeMobileNav();">
+            <i class="fa-solid fa-microchip"></i> Bio-Hub
+          </button>
         </div>
       </div>
     </div>
@@ -497,7 +489,7 @@
           </div>
           <h1 class="hero-title">
             Ubah Residu Ampas Kopi Menjadi <br>
-            <span class="text-gradient-emerald">Ketahanan Pangan &amp; Solusi Baglog Murah</span>
+            <span class="text-gradient-emerald">Ketahanan Pangan &amp; Efisiensi Media Tanam Baglog</span>
           </h1>
           <p class="hero-description">
             Sirkula menjembatani <strong>kedai kopi perkotaan</strong> dengan <strong>petani jamur tiram lokal</strong>. 
@@ -511,7 +503,7 @@
             </button>
             <button class="btn-secondary" onclick="switchRole('downstream')">
               <i class="fa-solid fa-store"></i>
-              <span>Beli Baglog Murah (Petani Jamur)</span>
+              <span>Beli Baglog Terformulasi (Petani Jamur)</span>
             </button>
           </div>
 
@@ -527,7 +519,7 @@
               <strong>3-5 Hari</strong> Inkubasi Miselium Lebih Cepat
             </div>
             <div class="stat-pill">
-              <strong>100%</strong> Garansi Tumbuh Sirkula
+              <strong>Garansi</strong> Penggantian Substrat Teruji
             </div>
           </div>
         </div>
@@ -535,6 +527,24 @@
         <div class="hero-visual">
           <div class="hero-image-card">
             <img src="/assets/images/sirkula_hero.jpg" alt="Ekosistem Sirkula Kopi dan Jamur" class="img-responsive hero-main-img">
+            
+            <!-- Floating Live Micro-Pills -->
+            <div class="hero-glass-pill pill-top-left">
+              <span class="live-pulse"></span>
+              <div class="hgp-text">
+                <strong>Formula SCG-20 Teruji</strong>
+                <small><i class="fa-solid fa-award text-gold"></i> Balitbang Pertanian</small>
+              </div>
+            </div>
+
+            <div class="hero-glass-pill pill-bottom-right">
+              <div class="hgp-icon"><i class="fa-solid fa-bolt"></i></div>
+              <div class="hgp-text">
+                <strong class="text-emerald">Hemat 17-20%</strong>
+                <small>Inkubasi 3-5 Hari Lebih Cepat</small>
+              </div>
+            </div>
+
             <div class="img-floating-caption">
               <div class="caption-icon"><i class="fa-solid fa-microchip"></i></div>
               <div class="caption-body">
@@ -546,8 +556,143 @@
         </div>
       </div>
 
+      <!-- Quick Stats Ribbon (Interactive Real-time Telemetry Showcase) -->
+      <div class="stats-ribbon landing-stats-ribbon" id="statsRibbon">
+        <div class="ribbon-inner">
+          <div class="ribbon-item">
+            <div class="ribbon-icon coffee-stat">
+              <i class="fa-solid fa-weight-hanging"></i>
+            </div>
+            <div class="ribbon-meta">
+              <span class="ribbon-label">Ampas Kopi Dikelola</span>
+              <div class="ribbon-val-group">
+                <span class="ribbon-value" id="ribbonCoffeeKg">14.850</span>
+                <span class="ribbon-unit">kg</span>
+                <span class="ribbon-trend"><i class="fa-solid fa-arrow-trend-up"></i> +12% bln ini</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ribbon-divider"></div>
+
+          <div class="ribbon-item">
+            <div class="ribbon-icon baglog-stat">
+              <i class="fa-solid fa-box-archive"></i>
+            </div>
+            <div class="ribbon-meta">
+              <span class="ribbon-label">Baglog Jamur Terdistribusi</span>
+              <div class="ribbon-val-group">
+                <span class="ribbon-value" id="ribbonBaglogCount">42.600</span>
+                <span class="ribbon-unit">unit</span>
+                <span class="ribbon-subtag">Ke 38 Kumbung</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ribbon-divider"></div>
+
+          <div class="ribbon-item">
+            <div class="ribbon-icon ch4-stat">
+              <i class="fa-solid fa-cloud-arrow-down"></i>
+            </div>
+            <div class="ribbon-meta">
+              <span class="ribbon-label">Emisi Metana (CH₄) Dicegah</span>
+              <div class="ribbon-val-group">
+                <span class="ribbon-value" id="ribbonCh4Kg">28.215</span>
+                <span class="ribbon-unit">kg CO₂e</span>
+                <span class="ribbon-subtag badge-green">Target Pengurangan Residu TPA</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ribbon-divider"></div>
+
+          <div class="ribbon-item ribbon-live-status">
+            <span class="live-pulse"></span>
+            <span class="live-text">Bio-Hub Lembang: <strong>Aktif Sterilisasi Batch #88</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== PROBLEM VS SOLUTION: MENGAPA SIRKULA ==================== -->
+      <section class="problem-solution-section" id="mengapa-sirkula">
+        <div class="section-header text-center">
+          <span class="section-tag highlight">Tantangan &amp; Solusi Sirkular</span>
+          <h2 class="section-title">Mengapa Ekosistem Sirkula Dibutuhkan?</h2>
+          <p class="section-subtitle">Menghubungkan dua titik kritis: ledakan sampah ampas kopi perkotaan dan tingginya biaya produksi petani jamur lokal.</p>
+        </div>
+
+        <div class="compare-grid">
+          <!-- Problem Card: Linear Model -->
+          <div class="compare-card problem-card">
+            <div class="compare-badge problem-badge">
+              <i class="fa-solid fa-triangle-exclamation"></i> Model Linier Konvensional (Sebelumnya)
+            </div>
+            <h3 class="compare-title">Residu Terbuang &amp; Petani Tercekik Biaya</h3>
+            <p class="compare-desc">Sistem pengelolaan sampah konvensional membiarkan ampas kopi berakhir di TPA tanpa nilai tambah, sementara petani jamur menghadapi lonjakan harga bahan baku.</p>
+            
+            <ul class="compare-list problem-list">
+              <li>
+                <div class="cl-icon red"><i class="fa-solid fa-xmark"></i></div>
+                <div>
+                  <strong>Emisi Gas Metana (CH₄) di TPA</strong>
+                  <p>Ampas kopi basah yang membusuk secara anaerobik di TPA menghasilkan gas metana dengan potensi pemanasan global 28x lebih tinggi daripada CO₂.</p>
+                </div>
+              </li>
+              <li>
+                <div class="cl-icon red"><i class="fa-solid fa-xmark"></i></div>
+                <div>
+                  <strong>Biaya Media Tanam Melonjak Tinggi</strong>
+                  <p>Harga serbuk kayu sengon dan dedak halus terus naik tajam (Rp3.000+/baglog), menekan margin keuntungan petani jamur rakyat.</p>
+                </div>
+              </li>
+              <li>
+                <div class="cl-icon red"><i class="fa-solid fa-xmark"></i></div>
+                <div>
+                  <strong>Ketiadaan Data &amp; Sertifikasi Keberlanjutan</strong>
+                  <p>Kedai kopi perkotaan tidak memiliki bukti verifikasi jejak karbon resmi atau kredensial ESG untuk promosi ramah lingkungan.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Solution Card: Circular Model -->
+          <div class="compare-card solution-card">
+            <div class="compare-badge solution-badge">
+              <i class="fa-solid fa-leaf"></i> Solusi Sirkula Terintegrasi (Closed-Loop)
+            </div>
+            <h3 class="compare-title">Sirkularitas Nyata: Nilai Tambah &amp; Efisiensi</h3>
+            <p class="compare-desc">Sirkula mengubah liabilitas lingkungan kedai kopi menjadi aset produksi berkinerja tinggi bagi petani jamur melalui bioteknologi terstandar.</p>
+
+            <ul class="compare-list solution-list">
+              <li>
+                <div class="cl-icon green"><i class="fa-solid fa-check"></i></div>
+                <div>
+                  <strong>Reduksi Emisi Metana &amp; Sertifikat ESG</strong>
+                  <p>Penjemputan terukur ampas kopi langsung dari kedai mencegah residu ke TPA, diverifikasi dengan QR Eco-Badge digital resmi.</p>
+                </div>
+              </li>
+              <li>
+                <div class="cl-icon green"><i class="fa-solid fa-check"></i></div>
+                <div>
+                  <strong>Hemat Biaya Baglog 17-20% &amp; Miselium Cepat</strong>
+                  <p>Formula substrat SCG-20 berharga hanya Rp2.500/baglog dengan laju inkubasi miselium 3-5 hari lebih cepat berkat nutrisi kopi.</p>
+                </div>
+              </li>
+              <li>
+                <div class="cl-icon green"><i class="fa-solid fa-check"></i></div>
+                <div>
+                  <strong>Monitoring IoT Kumbung &amp; Roadmap Buyback</strong>
+                  <p>Sensor mikroklimat cerdas memandu petani mengambil keputusan budidaya berdasarkan data, didukung rencana penyerapan panen di Tahun ke-3.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       <!-- Closed-Loop Flow Explanation -->
-      <div class="circular-loop-section">
+      <div class="circular-loop-section" id="circular-flow">
         <div class="section-header text-center">
           <span class="section-tag">Rantai Pasok Tertutup</span>
           <h2 class="section-title">Alur Tertutup (Closed-Loop) Sirkula</h2>
@@ -564,10 +709,10 @@
             </div>
             <div class="loop-card-body">
               <h3>Pengumpulan &amp; Pemilahan Ampas</h3>
-              <p>Kedai kopi memisahkan ampas kopi murni ke dalam ember kedap udara Sirkula berbarcode. Driver EV menjemput rutin, mengurangi beban sampah organik kedai.</p>
+              <p>Kedai kopi memisahkan ampas kopi murni ke dalam ember kedap udara berbarcode. Distribusi bertahap menggunakan kendaraan listrik sebagai bagian dari upaya menekan emisi dan meningkatkan efisiensi operasional.</p>
               <ul class="loop-perks">
                 <li><i class="fa-solid fa-check"></i> Sertifikat Pengurangan Emisi &amp; Eco-Badge</li>
-                <li><i class="fa-solid fa-check"></i> Pengambilan terjadwal tanpa ribet</li>
+                <li><i class="fa-solid fa-check"></i> Pengambilan terjadwal dengan evaluasi rute logistik</li>
               </ul>
             </div>
           </div>
@@ -581,7 +726,7 @@
           <div class="loop-card featured" data-step="2">
             <div class="loop-step-num">02</div>
             <div class="loop-card-media">
-              <img src="/assets/images/sirkula_hero.jpg" alt="Bio-Processing Facility Sirkula" class="loop-img">
+              <img src="/assets/images/sirkula_biohub.jpg" alt="Bio-Processing Facility Sirkula" class="loop-img">
               <span class="badge-role-tag sirkula-bg">Bio-Processing Sirkula Hub</span>
             </div>
             <div class="loop-card-body">
@@ -607,15 +752,14 @@
               <span class="badge-role-tag downstream-bg">Downstream Petani Jamur</span>
             </div>
             <div class="loop-card-body">
-              <h3>Distribusi Baglog &amp; Panen Maksimal</h3>
-              <p>Petani mendapatkan baglog siap tumbuh berkualitas tinggi dengan harga Rp2.500 (hemat 17%). Miselium merambat 3-5 hari lebih cepat dengan bobot jamur tebal.</p>
+              <h3>Distribusi Baglog &amp; Monitoring Budidaya</h3>
+              <p>Petani mendapatkan baglog siap tumbuh berkualitas tinggi yang dilengkapi panduan terukur. Monitoring berbasis IoT membantu petani memantau suhu dan kelembapan untuk mengambil keputusan budidaya berdasarkan data.</p>
               <ul class="loop-perks">
-                <li><i class="fa-solid fa-check"></i> Panen hingga 4-5 flush produktif</li>
-                <li><i class="fa-solid fa-check"></i> Bekas media (spent baglog) jadi kompos premium</li>
+                <li><i class="fa-solid fa-check"></i> Monitoring berbasis IoT membantu keputusan budidaya berbasis data</li>
+                <li><i class="fa-solid fa-check"></i> Bekas media (spent baglog) berpotensi menjadi kompos organik</li>
               </ul>
             </div>
           </div>
-        </div>
       </div>
 
       <!-- DUAL MVP EXHIBITION CARD -->
@@ -628,7 +772,7 @@
 
         <div class="mvp-grid">
           <!-- MVP FISIK: Interactive Formula Simulator -->
-          <div class="mvp-card fisik-card">
+          <div class="mvp-card fisik-card" id="impact-simulator">
             <div class="mvp-badge-header">
               <div class="mvp-pill"><i class="fa-solid fa-flask-vial"></i> MVP FISIK (Formula Substrat)</div>
               <span class="lab-certified"><i class="fa-solid fa-award"></i> Uji Lab Balitbang Pertanian</span>
@@ -698,7 +842,7 @@
           </div>
 
           <!-- MVP DIGITAL: 3 Core Features Interactive Showcase -->
-          <div class="mvp-card digital-card">
+          <div class="mvp-card digital-card" id="mvp-digital">
             <div class="mvp-badge-header">
               <div class="mvp-pill digital-pill"><i class="fa-solid fa-laptop-code"></i> MVP DIGITAL (Platform B2B)</div>
               <span class="live-system-tag"><i class="fa-solid fa-circle-dot blink"></i> Sistem Siap Uji</span>
@@ -730,7 +874,7 @@
                 </div>
                 <div class="feature-preview-info">
                   <div class="feature-title-row">
-                    <h4>Fitur 2: Toko Grosir Baglog Termurah</h4>
+                    <h4>Fitur 2: Toko Grosir Baglog Terformulasi SCG</h4>
                     <span class="badge-pill-xs">Downstream</span>
                   </div>
                   <p>Katalog B2B Rp2.500/baglog (-17%), kalkulator penghematan modal grosir, serta checkout instan dengan termin bersubsidi.</p>
@@ -748,7 +892,7 @@
                     <h4>Fitur 3: Kalkulator Panen &amp; Garansi</h4>
                     <span class="badge-pill-xs">Downstream</span>
                   </div>
-                  <p>Simulasi timeline flushes, proyeksi omset panen jamur, checklist SOP kumbung harian, dan tiket garansi ganti baglog baru.</p>
+                  <p>Simulasi timeline flushes, proyeksi omset panen jamur, checklist SOP kumbung harian, dan tiket klaim garansi penggantian substrat.</p>
                 </div>
                 <div class="feature-arrow"><i class="fa-solid fa-chevron-right"></i></div>
               </div>
@@ -761,6 +905,286 @@
           </div>
         </div>
       </div>
+
+      <!-- ==================== INTERACTIVE IMPACT ESTIMATOR FOR VISITORS ==================== -->
+      <section class="landing-calculator-section" id="kalkulator-interaktif">
+        <div class="section-header text-center">
+          <span class="section-tag highlight">Kalkulator Interaktif</span>
+          <h2 class="section-title">Hitung Potensi Dampak Hijau &amp; Penghematan Anda</h2>
+          <p class="section-subtitle">Simulasi langsung kontribusi pengurangan emisi untuk kedai kopi atau efisiensi modal bibit baglog bagi petani jamur.</p>
+        </div>
+
+        <div class="landing-calc-card">
+          <!-- Toggle Role Tabs -->
+          <div class="calc-role-selector">
+            <button class="calc-role-tab active" id="calcTabCafe" onclick="switchLandingCalcTab('cafe')">
+              <i class="fa-solid fa-mug-hot"></i>
+              <span>Mitra Kedai Kopi (Upstream)</span>
+            </button>
+            <button class="calc-role-tab" id="calcTabFarmer" onclick="switchLandingCalcTab('farmer')">
+              <i class="fa-solid fa-seedling"></i>
+              <span>Mitra Petani Jamur (Downstream)</span>
+            </button>
+          </div>
+
+          <!-- PANE 1: CAFE CALCULATOR -->
+          <div class="calc-pane active" id="calcPaneCafe">
+            <div class="calc-layout-grid">
+              <div class="calc-input-col">
+                <div class="calc-slider-box">
+                  <div class="csb-header">
+                    <label for="landingCafeWasteSlider">Perkiraan Ampas Kopi Dihasilkan:</label>
+                    <span class="csb-badge" id="landingCafeWasteDisplay">15 kg / hari (~150 cup)</span>
+                  </div>
+                  <input type="range" min="5" max="50" step="5" value="15" class="custom-range" id="landingCafeWasteSlider" oninput="updateLandingCafeCalc(this.value)">
+                  <div class="range-labels">
+                    <span>5 kg/hari (Mikro)</span>
+                    <span>20 kg/hari (Menengah)</span>
+                    <span>50 kg/hari (Kedai Ramai)</span>
+                  </div>
+                </div>
+
+                <div class="calc-perks-box">
+                  <h4><i class="fa-solid fa-circle-check text-emerald"></i> Manfaat Langsung Mitra Upstream:</h4>
+                  <ul>
+                    <li>Penjemputan terjadwal wadah kedap udara berbarcode langsung di lokasi</li>
+                    <li>Sertifikat Eco-Badge digital &amp; QR verifikasi jejak karbon resmi untuk meja kasir</li>
+                    <li>Poin Sirkula Reward dapat ditukar produk ramah lingkungan &amp; diskon operasional</li>
+                  </ul>
+                  <button class="btn-primary" onclick="switchRole('upstream')" style="margin-top: 1rem; width: 100%;">
+                    <i class="fa-solid fa-truck-ramp-box"></i> Mulai Jemput Ampas Kedai Anda
+                  </button>
+                </div>
+              </div>
+
+              <div class="calc-results-col">
+                <div class="calc-metric-tile highlight-tile">
+                  <div class="cmt-icon"><i class="fa-solid fa-weight-hanging text-brown"></i></div>
+                  <div class="cmt-info">
+                    <span class="cmt-label">Residu Ampas Kopi Dicegah dari TPA</span>
+                    <strong class="cmt-val" id="resCafeTotalWaste">450 kg</strong>
+                    <small>per bulan (5,4 ton/tahun)</small>
+                  </div>
+                </div>
+
+                <div class="calc-metric-tile highlight-tile">
+                  <div class="cmt-icon"><i class="fa-solid fa-cloud-arrow-down text-emerald"></i></div>
+                  <div class="cmt-info">
+                    <span class="cmt-label">Emisi Gas Metana (CH₄) Dieliminasi</span>
+                    <strong class="cmt-val text-emerald" id="resCafeCo2Prevented">855 kg CO₂e</strong>
+                    <small id="resCafeTreeEquiv">Setara menanam ~43 pohon penyerap karbon</small>
+                  </div>
+                </div>
+
+                <div class="calc-metric-tile highlight-tile">
+                  <div class="cmt-icon"><i class="fa-solid fa-coins text-gold"></i></div>
+                  <div class="cmt-info">
+                    <span class="cmt-label">Poin Sirkula Reward Akumulasi</span>
+                    <strong class="cmt-val text-gold" id="resCafePointsEarned">2.250 Poin</strong>
+                    <small>Tier 1 Green Partner Status</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PANE 2: FARMER CALCULATOR -->
+          <div class="calc-pane" id="calcPaneFarmer" style="display: none;">
+            <div class="calc-layout-grid">
+              <div class="calc-input-col">
+                <div class="calc-slider-box">
+                  <div class="csb-header">
+                    <label for="landingFarmerBaglogSlider">Kebutuhan Baglog Siap Tumbuh:</label>
+                    <span class="csb-badge" id="landingFarmerBaglogDisplay">2.000 Baglog / Siklus</span>
+                  </div>
+                  <input type="range" min="500" max="5000" step="500" value="2000" class="custom-range" id="landingFarmerBaglogSlider" oninput="updateLandingFarmerCalc(this.value)">
+                  <div class="range-labels">
+                    <span>500 (Kumbung Kecil)</span>
+                    <span>2.500 (Kumbung Sedang)</span>
+                    <span>5.000 (Kapasitas Penuh)</span>
+                  </div>
+                </div>
+
+                <div class="calc-perks-box">
+                  <h4><i class="fa-solid fa-circle-check text-emerald"></i> Keunggulan Substrat Sirkula SCG-20:</h4>
+                  <ul>
+                    <li>Harga hemat Rp2.500/baglog (-17% vs pasaran sengon murni Rp3.000)</li>
+                    <li>Laju inkubasi miselium 3-5 hari lebih cepat berkat nutrisi kafein &amp; C:N seimbang</li>
+                    <li>Garansi penggantian untuk baglog yang terbukti kontaminasi pra-pinhead</li>
+                  </ul>
+                  <button class="btn-primary" onclick="switchRole('downstream', 'catalog')" style="margin-top: 1rem; width: 100%;">
+                    <i class="fa-solid fa-cart-shopping"></i> Pesan Baglog Bersubsidi
+                  </button>
+                </div>
+              </div>
+
+              <div class="calc-results-col">
+                <div class="calc-metric-tile highlight-tile">
+                  <div class="cmt-icon"><i class="fa-solid fa-piggy-bank text-emerald"></i></div>
+                  <div class="cmt-info">
+                    <span class="cmt-label">Penghematan Modal Pembelian Baglog</span>
+                    <strong class="cmt-val text-emerald" id="resFarmerSaving">Rp 1.000.000</strong>
+                    <small>Hemat Rp500 per unit dibanding harga pasaran</small>
+                  </div>
+                </div>
+
+                <div class="calc-metric-tile highlight-tile">
+                  <div class="cmt-icon"><i class="fa-solid fa-weight-scale text-brown"></i></div>
+                  <div class="cmt-info">
+                    <span class="cmt-label">Estimasi Total Panen Jamur Tiram</span>
+                    <strong class="cmt-val" id="resFarmerYield">900 kg Jamur</strong>
+                    <small>Biological Efficiency ~45% dalam 4-5 flushes</small>
+                  </div>
+                </div>
+
+                <div class="calc-metric-tile highlight-tile">
+                  <div class="cmt-icon"><i class="fa-solid fa-sack-dollar text-gold"></i></div>
+                  <div class="cmt-info">
+                    <span class="cmt-label">Proyeksi Pendapatan Kotor Panen</span>
+                    <strong class="cmt-val text-gold" id="resFarmerRevenue">Rp 13.500.000</strong>
+                    <small>Asumsi harga jamur segar lokal Rp15.000/kg</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TESTIMONIALS: SUARA MITRA SIRKULA ==================== -->
+      <section class="testimonials-section" id="testimoni">
+        <div class="section-header text-center">
+          <span class="section-tag">Suara Ekosistem</span>
+          <h2 class="section-title">Cerita Nyata dari Balik Bar &amp; Kumbung</h2>
+          <p class="section-subtitle">Pengalaman kemitraan terpercaya kedai kopi perkotaan dan petani jamur lokal bersama Sirkula.</p>
+        </div>
+
+        <div class="testimonials-grid">
+          <!-- Card 1: Cafe Barista -->
+          <div class="testimonial-card">
+            <div class="testi-rating">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testi-quote">
+              &ldquo;Dulu ampas espresso 15 kg sehari cuma berakhir di kantong sampah hitam yang bau dan basah. Bersama Sirkula, ember jemput kedap udara sangat higienis, dan sertifikat Eco-Badge di meja kasir kami jadi daya tarik besar untuk pelanggan sadar lingkungan.&rdquo;
+            </p>
+            <div class="testi-author-row">
+              <div class="testi-avatar" style="background: linear-gradient(135deg, #6F4E37, #8B5E3C);">DA</div>
+              <div class="testi-meta">
+                <strong>Dimas Ardiansyah</strong>
+                <span>Head Barista • Kopi Titik Temu Sudirman Hub</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Mushroom Farmer -->
+          <div class="testimonial-card featured-testimonial">
+            <div class="testi-rating">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testi-quote">
+              &ldquo;Harga serbuk sengon di pasar terus naik tembus Rp3.000 per baglog. Begitu pakai baglog SCG Sirkula seharga Rp2.500, modal saya hemat sejuta tiap pesan 2.000 baglog. Miseliumnya putih tebal, pinhead tumbuh 4 hari lebih cepat dan payung jamurnya padat mekar.&rdquo;
+            </p>
+            <div class="testi-author-row">
+              <div class="testi-avatar" style="background: linear-gradient(135deg, #1B4D3E, #40916C);">AS</div>
+              <div class="testi-meta">
+                <strong>Pak Asep Saepudin</strong>
+                <span>Ketua Kelompok Tani • Berkah Jamur Farm Lembang</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Bio-Technologist -->
+          <div class="testimonial-card">
+            <div class="testi-rating">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testi-quote">
+              &ldquo;Spent coffee grounds (SCG) kaya akan lipid, protein mikro, dan rasio C:N ideal 28:1 jika difermentasi pada pH 6.5 dan disterilisasi suhu 121°C. Formula Sirkula adalah validasi sains agronomi nyata yang mengubah limbah organik menjadi biomassa pangan bergizi.&rdquo;
+            </p>
+            <div class="testi-author-row">
+              <div class="testi-avatar" style="background: linear-gradient(135deg, #3730A3, #6366F1);">HK</div>
+              <div class="testi-meta">
+                <strong>Dr. Ir. Hendra Kusuma</strong>
+                <span>Pakar Bioproses Pertanian • Peneliti Substrat Sirkuler</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== FAQ ACCORDION SECTION ==================== -->
+      <section class="faq-section" id="faq">
+        <div class="section-header text-center">
+          <span class="section-tag highlight">Pertanyaan Umum</span>
+          <h2 class="section-title">Pertanyaan yang Sering Diajukan</h2>
+          <p class="section-subtitle">Transparansi penuh seputar formula bioteknologi, operasional logistik, dan mekanisme kemitraan Sirkula.</p>
+        </div>
+
+        <div class="faq-accordion-wrap">
+          <!-- FAQ Item 1 -->
+          <div class="faq-item active" id="faqItem1">
+            <button class="faq-question-btn" onclick="toggleFaq('faqItem1')">
+              <span>Apakah ampas kopi tidak membuat media tanam terlalu asam untuk jamur tiram?</span>
+              <i class="fa-solid fa-chevron-down faq-chevron"></i>
+            </button>
+            <div class="faq-answer-body">
+              <p>Tidak. Ampas kopi segar memang memiliki keasaman pH ~5.0. Namun pada fasilitas Bio-Hub Sirkula, ampas kopi dinetralkan dengan penambahan kalsium karbonat murni (CaCO₃ 5%) dan difermentasi ringan hingga mencapai <strong>pH optimal 6.5</strong> yang merupakan tingkat keasaman ideal untuk miselium jamur tiram putih.</p>
+            </div>
+          </div>
+
+          <!-- FAQ Item 2 -->
+          <div class="faq-item" id="faqItem2">
+            <button class="faq-question-btn" onclick="toggleFaq('faqItem2')">
+              <span>Bagaimana mekanisme logistik penjemputan ampas dari kedai kopi?</span>
+              <i class="fa-solid fa-chevron-down faq-chevron"></i>
+            </button>
+            <div class="faq-answer-body">
+              <p>Kedai kopi mitra diberikan ember khusus food-grade berpenutup kedap udara dan berbarcode. Mitra menjadwalkan penjemputan berkala melalui dashboard. Penjemputan dilakukan secara bertahap menggunakan armada logistik terencana, termasuk integrasi kendaraan listrik sebagai bagian dari strategi efisiensi jangka panjang.</p>
+            </div>
+          </div>
+
+          <!-- FAQ Item 3 -->
+          <div class="faq-item" id="faqItem3">
+            <button class="faq-question-btn" onclick="toggleFaq('faqItem3')">
+              <span>Apakah baglog jamur SCG Sirkula memiliki garansi jika terkontaminasi?</span>
+              <i class="fa-solid fa-chevron-down faq-chevron"></i>
+            </button>
+            <div class="faq-answer-body">
+              <p>Ya. Sirkula memberikan <strong>Garansi Penggantian Substrat</strong> untuk baglog yang terbukti mengalami kontaminasi jamur liar (*Trichoderma*) sebelum tahap *pinhead* (tunas awal), dengan syarat SOP penyimpanan kumbung memenuhi checklist suhu dan kelembapan standar.</p>
+            </div>
+          </div>
+
+          <!-- FAQ Item 4 -->
+          <div class="faq-item" id="faqItem4">
+            <button class="faq-question-btn" onclick="toggleFaq('faqItem4')">
+              <span>Kapan skema buyback (penyerapan panen jamur petani) mulai dibuka?</span>
+              <i class="fa-solid fa-chevron-down faq-chevron"></i>
+            </button>
+            <div class="faq-answer-body">
+              <p>Skema penyerapan panen (buyback) dijadwalkan pada <strong>Roadmap Tahun ke-3 (Future Development)</strong> setelah infrastruktur rantai dingin (*cold-chain containers*), standarisasi sortasi Grade A, dan kemitraan off-taker supermarket/horeca siap beroperasi penuh.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== FINAL CALL TO ACTION BANNER ==================== -->
+      <section class="landing-cta-banner">
+        <div class="cta-banner-card">
+          <div class="cta-content">
+            <div class="cta-badge"><i class="fa-solid fa-seedling"></i> Bergabung dengan Gerakan Ekonomi Sirkular</div>
+            <h2 class="cta-title">Siap Mengubah Residu Kopi Menjadi Nilai Tambah Hijau?</h2>
+            <p class="cta-desc">Dukung kelestarian bumi dari cangkir kopi hingga ketahanan pangan jamur tiram lokal. Akses akun demo sekarang atau daftarkan bisnis Anda.</p>
+            <div class="cta-buttons-group">
+              <button class="btn-primary btn-cta-glow" onclick="openAuthPage('daftar')">
+                <i class="fa-solid fa-user-plus"></i> Daftar Kemitraan Sirkula
+              </button>
+              <button class="btn-secondary btn-cta-light" onclick="quickLoginAs('upstream')">
+                <i class="fa-solid fa-laptop-code"></i> Coba Demo Interaktif
+              </button>
+            </div>
+          </div>
+      </section>
     </section>
 
     <!-- VIEW 2: PORTAL KEDAI KOPI (UPSTREAM DASHBOARD) -->
@@ -782,7 +1206,7 @@
         </div>
 
         <div class="header-action-cards">
-          <button class="btn-eco-badge-card" onclick="openEcoBadgeModal()">
+          <button class="btn-eco-badge-card" id="esg" onclick="openEcoBadgeModal()">
             <i class="fa-solid fa-qrcode"></i>
             <div class="text-left">
               <span class="btn-label-small">Promosi Hijau Kedai</span>
@@ -793,7 +1217,7 @@
       </div>
 
       <!-- Upstream Impact Metric Cards -->
-      <div class="metrics-grid">
+      <div class="metrics-grid" id="upstream-waste">
         <div class="metric-card">
           <div class="metric-top">
             <span class="metric-title">Total Ampas Diselamatkan</span>
@@ -842,7 +1266,7 @@
           </div>
         </div>
 
-        <div class="metric-card">
+        <div class="metric-card" id="rewards">
           <div class="metric-top">
             <span class="metric-title">Poin Sirkula Reward</span>
             <div class="metric-icon-circle brown-soft">
@@ -859,167 +1283,664 @@
         </div>
       </div>
 
-      <!-- Main Feature Layout: Pickup Form & Pipeline Status Tracker -->
-      <div class="dashboard-columns">
-        <!-- Interactive Pickup Scheduler Form -->
-        <div class="dash-card">
-          <div class="dash-card-header">
-            <div class="header-icon-title">
-              <div class="header-icon"><i class="fa-solid fa-calendar-plus"></i></div>
-              <div>
-                <h3 class="card-title">Jadwalkan Penjemputan Ampas Kopi</h3>
-                <p class="card-subtitle">Armada penjemput Sirkula akan menimbang di lokasi secara akurat</p>
-              </div>
+      <!-- UPSTREAM PORTAL NAVIGATION TABS -->
+      <div class="cafe-tabs-bar">
+        <button class="cafe-nav-btn active" id="cNavPickup" onclick="switchCafeTab('pickup')">
+          <i class="fa-solid fa-truck-fast"></i>
+          <span>Fitur 1: Penjemputan EV &amp; Pelacak Armada</span>
+        </button>
+        <button class="cafe-nav-btn" id="cNavBins" onclick="switchCafeTab('bins')">
+          <i class="fa-solid fa-trash-can"></i>
+          <span>Fitur 2: Wadah Smart Bin &amp; SOP Mutu</span>
+        </button>
+        <button class="cafe-nav-btn" id="cNavRewards" onclick="switchCafeTab('rewards')">
+          <i class="fa-solid fa-coins"></i>
+          <span>Fitur 3: Sirkula Eco-Points &amp; Reward</span>
+        </button>
+        <button class="cafe-nav-btn" id="cNavEsg" onclick="switchCafeTab('esg')">
+          <i class="fa-solid fa-award"></i>
+          <span>Fitur 4: Portofolio Emisi ESG &amp; Promosi Hijau</span>
+        </button>
+      </div>
+
+      <!-- ==================== SUB-TAB 1: PICKUP & EV FLEET TRACKER ==================== -->
+      <div id="cafeTabPickup" class="cafe-tab-pane active">
+        <!-- Fleet Dispatch Active Banner -->
+        <div class="fleet-dispatch-banner">
+          <div class="fleet-dispatch-left">
+            <div class="fleet-dispatch-icon">
+              <i class="fa-solid fa-motorcycle"></i>
+            </div>
+            <div class="fleet-dispatch-info">
+              <h4>Armada EV Penjemputan Sedang Bergerak</h4>
+              <p>Driver: <strong>Kang Rahmat</strong> • Gesits G1 Electric (B-1492-SRK) • Koridor Sudirman Hub 04</p>
             </div>
           </div>
+          <div class="fleet-telemetry-chips">
+            <span class="fleet-tele-chip"><i class="fa-solid fa-battery-three-quarters text-emerald"></i> Batere 82%</span>
+            <span class="fleet-tele-chip"><i class="fa-solid fa-clock"></i> Estimasi Tiba: 14:20 WIB (18 Menit)</span>
+            <span class="fleet-tele-chip"><i class="fa-solid fa-shield-halved"></i> Timbangan Bluetooth Ready</span>
+          </div>
+        </div>
 
-          <form id="pickupForm" onsubmit="handleSchedulePickup(event)" class="interactive-form">
-            <div class="form-row">
-              <div class="form-group col-6">
-                <label for="pickupDate" class="form-label">Tanggal Penjemputan <span class="req">*</span></label>
-                <div class="input-with-icon">
-                  <i class="fa-regular fa-calendar input-icon"></i>
-                  <input type="date" id="pickupDate" required class="form-control">
+        <div class="dashboard-columns">
+          <!-- Interactive Pickup Scheduler Form -->
+          <div class="dash-card" id="pickup-schedule">
+            <div class="dash-card-header">
+              <div class="header-icon-title">
+                <div class="header-icon"><i class="fa-solid fa-calendar-plus"></i></div>
+                <div>
+                  <h3 class="card-title">Jadwalkan Penjemputan Ampas Kopi</h3>
+                  <p class="card-subtitle">Distribusi bertahap menggunakan kendaraan listrik sebagai bagian dari upaya menekan emisi dan meningkatkan efisiensi operasional.</p>
                 </div>
               </div>
-              <div class="form-group col-6">
-                <label for="pickupSlot" class="form-label">Sesi Waktu <span class="req">*</span></label>
-                <div class="input-with-icon">
-                  <i class="fa-regular fa-clock input-icon"></i>
-                  <select id="pickupSlot" required class="form-control">
-                    <option value="Pagi (08:30 - 11:30 WIB)">Sesi Pagi (08:30 - 11:30 WIB)</option>
-                    <option value="Sore (14:00 - 17:00 WIB)" selected>Sesi Sore (14:00 - 17:00 WIB)</option>
+            </div>
+
+            <!-- EV Operational Transparency Notice Box -->
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 14px; margin-bottom: 16px; font-size: 0.85rem; color: #475569;">
+              <strong style="color: #1e293b; display: block; margin-bottom: 4px;">
+                <i class="fa-solid fa-circle-info" style="color: #0284c7; margin-right: 6px;"></i>
+                Transparansi Operasional Kendaraan Listrik (EV)
+              </strong>
+              Penggunaan armada listrik tetap memerlukan biaya pengadaan kendaraan, biaya listrik/charging, perawatan berkala (maintenance), serta kesiapan infrastruktur charging stasiun. Pendekatan ini diterapkan secara bertahap untuk efisiensi rute dan reduksi emisi karbon jangka panjang.
+            </div>
+
+            <form id="pickupForm" onsubmit="handleSchedulePickup(event)" class="interactive-form">
+              <div class="form-row">
+                <div class="form-group col-6">
+                  <label for="pickupDate" class="form-label">Tanggal Penjemputan <span class="req">*</span></label>
+                  <div class="input-with-icon">
+                    <i class="fa-regular fa-calendar input-icon"></i>
+                    <input type="date" id="pickupDate" required class="form-control">
+                  </div>
+                </div>
+                <div class="form-group col-6">
+                  <label for="pickupSlot" class="form-label">Sesi Waktu <span class="req">*</span></label>
+                  <div class="input-with-icon">
+                    <i class="fa-regular fa-clock input-icon"></i>
+                    <select id="pickupSlot" required class="form-control">
+                      <option value="Pagi (08:30 - 11:30 WIB)">Sesi Pagi (08:30 - 11:30 WIB)</option>
+                      <option value="Sore (14:00 - 17:00 WIB)" selected>Sesi Sore (14:00 - 17:00 WIB)</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="pickupWeight" class="form-label">Estimasi Berat Ampas (Kg) <span class="req">*</span></label>
+                <div class="weight-input-group">
+                  <div class="input-with-icon flex-grow">
+                    <i class="fa-solid fa-scale-balanced input-icon"></i>
+                    <input type="number" id="pickupWeight" min="5" max="300" value="25" required class="form-control" placeholder="Contoh: 25">
+                  </div>
+                  <div class="preset-weight-btns">
+                    <button type="button" class="btn-preset" onclick="setPresetWeight(10)">+10 kg</button>
+                    <button type="button" class="btn-preset active" onclick="setPresetWeight(25)">+25 kg</button>
+                    <button type="button" class="btn-preset" onclick="setPresetWeight(50)">+50 kg</button>
+                  </div>
+                </div>
+                <small class="form-help">Minimal penjemputan mitra terdaftar adalah 10 kg ampas kopi tiris.</small>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-6">
+                  <label for="scgTypeSelect" class="form-label">Tipe Residu Kopi</label>
+                  <select id="scgTypeSelect" class="form-control">
+                    <option value="espresso" selected>Puck Espresso Machine (SCG Murni)</option>
+                    <option value="filter">Filter / Manual Brew (V60/Aeropress Tiris)</option>
+                    <option value="coldbrew">Residu Cold Brew Tiris</option>
+                  </select>
+                </div>
+                <div class="form-group col-6">
+                  <label for="binSelection" class="form-label">Wadah yang Dijemput</label>
+                  <select id="binSelection" class="form-control">
+                    <option value="bin1" selected>Smart Bin #01 (Espresso Bar - 17.5 kg)</option>
+                    <option value="bin2">Smart Bin #02 (Manual Brew Bar - 9.0 kg)</option>
+                    <option value="all">Semua Wadah Penuh (Ember 1 &amp; 2)</option>
                   </select>
                 </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label for="pickupWeight" class="form-label">Estimasi Berat Ampas (Kg) <span class="req">*</span></label>
-              <div class="weight-input-group">
-                <div class="input-with-icon flex-grow">
-                  <i class="fa-solid fa-scale-balanced input-icon"></i>
-                  <input type="number" id="pickupWeight" min="5" max="300" value="25" required class="form-control" placeholder="Contoh: 25">
-                </div>
-                <div class="preset-weight-btns">
-                  <button type="button" class="btn-preset" onclick="setPresetWeight(10)">+10 kg</button>
-                  <button type="button" class="btn-preset active" onclick="setPresetWeight(25)">+25 kg</button>
-                  <button type="button" class="btn-preset" onclick="setPresetWeight(50)">+50 kg</button>
+              <div class="form-group">
+                <label for="storageNotes" class="form-label">Kondisi Wadah &amp; Catatan Khusus Barista</label>
+                <textarea id="storageNotes" rows="2" class="form-control" placeholder="Contoh: Tersedia di ember hijau Sirkula di area bar belakang, ampas telah ditiriskan dan bebas sedotan/tisu."></textarea>
+              </div>
+
+              <div class="form-action-row">
+                <button type="submit" class="btn-submit-pickup" id="btnSubmitPickup">
+                  <i class="fa-solid fa-truck-fast"></i>
+                  <span>Konfirmasi Jadwal Penjemputan</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Real-time Pickup Status Pipeline Tracker -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div class="header-icon-title">
+                <div class="header-icon tracker-icon"><i class="fa-solid fa-route"></i></div>
+                <div>
+                  <h3 class="card-title">Pelacak Penjemputan Real-Time</h3>
+                  <p class="card-subtitle">Status armada dan penimbangan penjemputan aktif</p>
                 </div>
               </div>
-              <small class="form-help">Minimal penjemputan gratis adalah 10 kg ampas kopi tiris.</small>
+              <div class="pipeline-badge" id="activeOrderIdTag">Order #SRK-PK-904</div>
             </div>
 
-            <div class="form-group">
-              <label for="storageNotes" class="form-label">Kondisi Wadah &amp; Catatan Khusus</label>
-              <textarea id="storageNotes" rows="2" class="form-control" placeholder="Contoh: Tersedia di 2 ember Sirkula warna hijau di area bar belakang, ampas espresso basah telah ditiriskan."></textarea>
+            <!-- Interactive Stepper Pipeline -->
+            <div class="pipeline-stepper" id="pipelineStepper">
+              <div class="step-node completed" id="step1">
+                <div class="step-circle"><i class="fa-solid fa-check"></i></div>
+                <div class="step-details">
+                  <span class="step-title">1. Dijadwalkan</span>
+                  <span class="step-time" id="step1Time">Hari ini, 09:15 WIB</span>
+                  <span class="step-desc">Penjemputan terdaftar di sistem Sirkula</span>
+                </div>
+              </div>
+
+              <div class="step-connector active" id="conn1"></div>
+
+              <div class="step-node current" id="step2">
+                <div class="step-circle"><i class="fa-solid fa-truck-moving"></i></div>
+                <div class="step-details">
+                  <span class="step-title">2. Driver Menuju Lokasi</span>
+                  <span class="step-time" id="step2Time">Estimasi Tiba: 14:20 WIB</span>
+                  <span class="step-desc">Driver: <strong>Kang Rahmat</strong> (Armada Listrik Uji Efisiensi Rute B-1492-SRK)</span>
+                </div>
+              </div>
+
+              <div class="step-connector" id="conn2"></div>
+
+              <div class="step-node pending" id="step3">
+                <div class="step-circle"><i class="fa-solid fa-scale-balanced"></i></div>
+                <div class="step-details">
+                  <span class="step-title">3. Limbah Ditimbang &amp; Diangkut</span>
+                  <span class="step-time">Menunggu penimbangan</span>
+                  <span class="step-desc">Timbangan digital terhubung bluetooth</span>
+                </div>
+              </div>
+
+              <div class="step-connector" id="conn3"></div>
+
+              <div class="step-node pending" id="step4">
+                <div class="step-circle"><i class="fa-solid fa-circle-check"></i></div>
+                <div class="step-details">
+                  <span class="step-title">4. Selesai (Emisi Terkreditasi)</span>
+                  <span class="step-time">Tahap akhir</span>
+                  <span class="step-desc">Sertifikat terbit otomatis &amp; poin bertambah</span>
+                </div>
+              </div>
             </div>
 
-            <div class="form-action-row">
-              <button type="submit" class="btn-submit-pickup" id="btnSubmitPickup">
-                <i class="fa-solid fa-truck-fast"></i>
-                <span>Konfirmasi Jadwal Penjemputan</span>
-              </button>
+            <!-- Pipeline Controls for Demo Simulation -->
+            <div class="pipeline-demo-controller">
+              <span class="demo-tag"><i class="fa-solid fa-play"></i> Simulasi Pipeline:</span>
+              <div class="demo-btns">
+                <button class="btn-demo-step" onclick="simulateStep(1)">1. Dijadwalkan</button>
+                <button class="btn-demo-step active" onclick="simulateStep(2)">2. Menuju Lokasi</button>
+                <button class="btn-demo-step" onclick="simulateStep(3)">3. Timbang</button>
+                <button class="btn-demo-step" onclick="simulateStep(4)">4. Selesai</button>
+              </div>
             </div>
-          </form>
+
+            <!-- Pickup History Snippet -->
+            <div class="pickup-history-summary">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                <h4 class="history-title" style="margin:0;"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat 3 Penjemputan Terakhir</h4>
+                <button class="btn-text-link" onclick="showToast('Mengunduh rekap riwayat penjemputan bulan ini (CSV)...', 'info')"><i class="fa-solid fa-file-csv"></i> Unduh Rekap</button>
+              </div>
+              <div class="history-list" id="pickupHistoryList">
+                <div class="history-item">
+                  <div class="history-left">
+                    <span class="hist-id">#SRK-PK-892</span>
+                    <span class="hist-date">24 Sep 2026</span>
+                  </div>
+                  <div class="history-mid">
+                    <span class="hist-weight">28.5 kg SCG</span>
+                    <span class="hist-co2">54.1 kg CO₂e dicegah</span>
+                  </div>
+                  <span class="badge-status-done">Selesai</span>
+                </div>
+                <div class="history-item">
+                  <div class="history-left">
+                    <span class="hist-id">#SRK-PK-880</span>
+                    <span class="hist-date">21 Sep 2026</span>
+                  </div>
+                  <div class="history-mid">
+                    <span class="hist-weight">32.0 kg SCG</span>
+                    <span class="hist-co2">60.8 kg CO₂e dicegah</span>
+                  </div>
+                  <span class="badge-status-done">Selesai</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== SUB-TAB 2: SMART BINS & BIO-QUALITY SOP ==================== -->
+      <div id="cafeTabBins" class="cafe-tab-pane">
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="font-family: var(--font-display); font-size: 1.3rem; color: var(--slate-900); margin-bottom: 0.35rem;">
+            <i class="fa-solid fa-bucket" style="color: var(--coffee-700); margin-right: 6px;"></i>
+            Inventaris Wadah Ember Sirkula &amp; Telemetri Smart Bin
+          </h3>
+          <p style="font-size: 0.88rem; color: var(--slate-600); margin: 0;">
+            Wadah ember 20 liter food-grade dengan seal gasket kedap udara ganda untuk mencegah kontaminasi dan mempertahankan kadar air ideal ampas kopi sebelum diangkut ke Bio-Hub.
+          </p>
         </div>
 
-        <!-- Real-time Pickup Status Pipeline Tracker -->
-        <div class="dash-card">
-          <div class="dash-card-header">
-            <div class="header-icon-title">
-              <div class="header-icon tracker-icon"><i class="fa-solid fa-route"></i></div>
+        <!-- Smart Bins 3-Column Grid -->
+        <div class="smart-bins-grid">
+          <!-- Bin 1 -->
+          <div class="smart-bin-card">
+            <div>
+              <div class="smart-bin-top">
+                <div class="bin-avatar-wrap">
+                  <i class="fa-solid fa-bucket"></i>
+                </div>
+                <span class="bin-badge-status ready"><i class="fa-solid fa-triangle-exclamation"></i> Siap Dijemput (88%)</span>
+              </div>
+              <h4 class="bin-title">Smart Bin #01 — Bar Depan</h4>
+              <p class="bin-location"><i class="fa-solid fa-location-dot"></i> Area Bar Espresso Utama • Kapasitas: 20 Kg</p>
+
+              <div class="bin-gauge-box">
+                <div class="bin-gauge-label">
+                  <span>Isi Wadah: <strong>17.5 Kg</strong></span>
+                  <span class="text-amber">88%</span>
+                </div>
+                <div class="bin-progress-track">
+                  <div class="bin-progress-bar fill-amber" style="width: 88%;"></div>
+                </div>
+              </div>
+
+              <div class="bin-sensor-meta">
+                <span><i class="fa-solid fa-temperature-half"></i> 26.2°C</span>
+                <span><i class="fa-solid fa-droplet"></i> Kadar Air: 58%</span>
+                <span><i class="fa-solid fa-lock"></i> Seal Gasket: Rapat</span>
+              </div>
+            </div>
+
+            <button type="button" class="btn-primary" style="width: 100%; justify-content: center;" onclick="requestSmartBinAction('Bin #01 (Espresso Bar)', 17.5)">
+              <i class="fa-solid fa-truck-fast"></i> Panggil Kurir untuk Bin Ini
+            </button>
+          </div>
+
+          <!-- Bin 2 -->
+          <div class="smart-bin-card">
+            <div>
+              <div class="smart-bin-top">
+                <div class="bin-avatar-wrap" style="background: var(--primary-100); color: var(--primary-700);">
+                  <i class="fa-solid fa-bucket"></i>
+                </div>
+                <span class="bin-badge-status active"><i class="fa-solid fa-circle-check"></i> Pengisian Aktif (45%)</span>
+              </div>
+              <h4 class="bin-title">Smart Bin #02 — Manual Brew</h4>
+              <p class="bin-location"><i class="fa-solid fa-location-dot"></i> Stasiun Slow Bar &amp; V60 • Kapasitas: 20 Kg</p>
+
+              <div class="bin-gauge-box">
+                <div class="bin-gauge-label">
+                  <span>Isi Wadah: <strong>9.0 Kg</strong></span>
+                  <span class="text-emerald">45%</span>
+                </div>
+                <div class="bin-progress-track">
+                  <div class="bin-progress-bar fill-emerald" style="width: 45%;"></div>
+                </div>
+              </div>
+
+              <div class="bin-sensor-meta">
+                <span><i class="fa-solid fa-temperature-half"></i> 25.8°C</span>
+                <span><i class="fa-solid fa-droplet"></i> Kadar Air: 55%</span>
+                <span><i class="fa-solid fa-lock"></i> Seal Gasket: Rapat</span>
+              </div>
+            </div>
+
+            <button type="button" class="btn-secondary" style="width: 100%; justify-content: center;" onclick="showToast('Bin #02 masih berstatus pengisian normal (45%). Disarankan dijemput saat mencapai 15 kg.', 'info')">
+              <i class="fa-solid fa-info-circle"></i> Status Pengisian Normal
+            </button>
+          </div>
+
+          <!-- Bin 3 -->
+          <div class="smart-bin-card">
+            <div>
+              <div class="smart-bin-top">
+                <div class="bin-avatar-wrap" style="background: var(--slate-100); color: var(--slate-600);">
+                  <i class="fa-solid fa-bucket"></i>
+                </div>
+                <span class="bin-badge-status standby"><i class="fa-solid fa-clock"></i> Standby (18%)</span>
+              </div>
+              <h4 class="bin-title">Smart Bin #03 — Kitchen Prep</h4>
+              <p class="bin-location"><i class="fa-solid fa-location-dot"></i> Area Batch Brew &amp; Gudang • Kapasitas: 20 Kg</p>
+
+              <div class="bin-gauge-box">
+                <div class="bin-gauge-label">
+                  <span>Isi Wadah: <strong>3.5 Kg</strong></span>
+                  <span>18%</span>
+                </div>
+                <div class="bin-progress-track">
+                  <div class="bin-progress-bar fill-slate" style="width: 18%;"></div>
+                </div>
+              </div>
+
+              <div class="bin-sensor-meta">
+                <span><i class="fa-solid fa-temperature-half"></i> 25.3°C</span>
+                <span><i class="fa-solid fa-droplet"></i> Kadar Air: 52%</span>
+                <span><i class="fa-solid fa-lock"></i> Seal Gasket: Rapat</span>
+              </div>
+            </div>
+
+            <button type="button" class="btn-secondary" style="width: 100%; justify-content: center;" onclick="showToast('Bin #03 tersedia untuk menampung ampas cold-brew atau batch brew baru.', 'info')">
+              <i class="fa-solid fa-plus"></i> Siap Menampung Ampas
+            </button>
+          </div>
+        </div>
+
+        <!-- Barista SOP Bio-Quality Bento Grid -->
+        <div style="margin-bottom: 1rem;">
+          <h4 style="font-family: var(--font-display); font-size: 1.15rem; color: var(--slate-900); margin-bottom: 0.25rem;">
+            <i class="fa-solid fa-clipboard-check" style="color: var(--primary-600); margin-right: 6px;"></i>
+            SOP Pemilahan &amp; Mutu Ampas Kopi Sirkula (Standar Bio-Hub)
+          </h4>
+          <p style="font-size: 0.85rem; color: var(--slate-600); margin: 0 0 1rem 0;">
+            Kualitas media tanam jamur tiram sangat ditentukan oleh kemurnian dan kadar air spent coffee grounds (SCG) yang disetorkan oleh barista mitra.
+          </p>
+        </div>
+
+        <div class="sop-bento-grid">
+          <div class="sop-bento-card">
+            <span class="sop-card-num">Pilar 01</span>
+            <h5 class="sop-card-title"><i class="fa-solid fa-droplet" style="color:#0284C7; margin-right:4px;"></i> Kadar Air 50-60%</h5>
+            <p class="sop-card-desc">Ketuk porta-filter hingga puck padat terpisah. Jangan memasukkan air sisa bilasan bar atau tetesan es agar substrat tidak becek dan busuk.</p>
+          </div>
+
+          <div class="sop-bento-card">
+            <span class="sop-card-num">Pilar 02</span>
+            <h5 class="sop-card-title"><i class="fa-solid fa-ban" style="color:#DC2626; margin-right:4px;"></i> 100% Bebas Kontaminan</h5>
+            <p class="sop-card-desc">Dilarang memasukkan sedotan plastik, tisu bar, teh celup, susu, sirup pemanis, atau puntung rokok. Kontaminasi dapat menggagalkan sterilisasi jamur.</p>
+          </div>
+
+          <div class="sop-bento-card">
+            <span class="sop-card-num">Pilar 03</span>
+            <h5 class="sop-card-title"><i class="fa-solid fa-lock" style="color:#059669; margin-right:4px;"></i> Kerapatan Gasket Seal</h5>
+            <p class="sop-card-desc">Tutup rapat ember kedap udara Sirkula setelah setiap pergantian shift barista untuk menahan bau dan mencegah pertumbuhan spora jamur liar.</p>
+          </div>
+
+          <div class="sop-bento-card">
+            <span class="sop-card-num">Pilar 04</span>
+            <h5 class="sop-card-title"><i class="fa-solid fa-clock-rotate-left" style="color:#D97706; margin-right:4px;"></i> Siklus Maksimal 48 Jam</h5>
+            <p class="sop-card-desc">Jadwalkan penjemputan paling lambat setiap 2 hari sekali agar ampas kopi segar dapat segera diolah dalam siklus autoclave Bio-Hub.</p>
+          </div>
+        </div>
+
+        <!-- Supply Request Strip -->
+        <div class="supply-request-strip">
+          <div>
+            <strong style="color: var(--slate-900); font-size: 0.95rem; display: block; margin-bottom: 2px;">
+              <i class="fa-solid fa-boxes-packing" style="color: var(--coffee-700); margin-right: 6px;"></i>
+              Perlu Tambahan Wadah Ember atau Penggantian Seal Karet?
+            </strong>
+            <span style="font-size: 0.83rem; color: var(--slate-600);">Pengiriman perlengkapan gratis untuk mitra bersertifikat Green Partner Tier 1.</span>
+          </div>
+          <div style="display: flex; gap: 0.65rem; flex-wrap: wrap;">
+            <button type="button" class="btn-secondary" onclick="requestSupplies('Ember Kedap Udara 20L')">
+              <i class="fa-solid fa-plus"></i> Request Ember Tambahan
+            </button>
+            <button type="button" class="btn-secondary" onclick="requestSupplies('Karet Seal Gasket Cadangan')">
+              <i class="fa-solid fa-wrench"></i> Ganti Gasket Seal
+            </button>
+            <button type="button" class="btn-secondary" onclick="showToast('Mengunduh Lembar Poster Panduan SOP Barista (PDF Cetak A3)...', 'info')">
+              <i class="fa-solid fa-download"></i> Unduh Poster Meja Bar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== SUB-TAB 3: SIRKULA ECO-POINTS & REWARDS ==================== -->
+      <div id="cafeTabRewards" class="cafe-tab-pane">
+        <!-- Rewards Tier Status Banner -->
+        <div class="reward-tier-header">
+          <div class="reward-tier-details">
+            <span class="role-pill" style="background: rgba(255,255,255,0.18); color: #FFFFFF; margin-bottom: 0.5rem;">
+              <i class="fa-solid fa-leaf"></i> Sirkula Green Loyalty Program
+            </span>
+            <h3>Saldo Anda: <span id="cafeRewardPointsDetail" style="color: #FBBF24;">3.425</span> Poin Hijau</h3>
+            <p>Konversi Reward: 1 kg ampas kopi = 5 Poin Sirkula • Tingkat Kemitraan: <strong>Green Partner Tier 1 (Gold Acorn)</strong></p>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); border-radius: var(--radius-md); padding: 1rem 1.25rem; min-width: 260px;">
+            <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:0.35rem;">
+              <span>Progress Tier 2 (Champion):</span>
+              <strong>685 / 1.000 kg</strong>
+            </div>
+            <div style="height:8px; background:rgba(255,255,255,0.2); border-radius:9999px; overflow:hidden; margin-bottom:0.4rem;">
+              <div style="width: 68.5%; height:100%; background: #FBBF24; border-radius:9999px;"></div>
+            </div>
+            <small style="font-size:0.74rem; color: rgba(255,255,255,0.8);">Kumpulkan 315 kg lagi untuk bebas biaya retribusi EV selamanya.</small>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 1.25rem;">
+          <h4 style="font-family: var(--font-display); font-size: 1.15rem; color: var(--slate-900); margin-bottom: 0.25rem;">
+            <i class="fa-solid fa-gift" style="color: var(--coffee-700); margin-right: 6px;"></i>
+            Katalog Penukaran Hadiah Mitra Hijau (Reward Store)
+          </h4>
+          <p style="font-size: 0.85rem; color: var(--slate-600); margin: 0;">Gunakan poin hasil penyelamatan ampas kopi Anda untuk mendapatkan keuntungan operasional dan merchandise barista.</p>
+        </div>
+
+        <!-- 6-Item Reward Catalog Grid -->
+        <div class="reward-catalog-grid">
+          <!-- Item 1 -->
+          <div class="reward-card">
+            <div>
+              <div class="reward-card-header">
+                <span class="reward-pts-pill"><i class="fa-solid fa-coins"></i> 1.000 Pts</span>
+                <span class="badge-role-tag" style="background:#E0F2FE; color:#0369A1;">Voucher Bahan Baku</span>
+              </div>
+              <h5 class="reward-card-title">Voucher Diskon Biji Kopi B2B Rp 100.000</h5>
+              <p class="reward-card-desc">Potongan pembelian biji kopi single origin dari kelompok tani kemitraan binaan Sirkula Jawa Barat.</p>
+            </div>
+            <button type="button" class="btn-primary" style="width:100%; justify-content:center;" onclick="redeemCafeReward('Voucher Kopi B2B Rp100.000', 1000)">
+              <i class="fa-solid fa-ticket"></i> Tukar Reward (1.000 Pts)
+            </button>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="reward-card">
+            <div>
+              <div class="reward-card-header">
+                <span class="reward-pts-pill"><i class="fa-solid fa-coins"></i> 1.500 Pts</span>
+                <span class="badge-role-tag" style="background:#D1FAE5; color:#065F46;">Merchandise Barista</span>
+              </div>
+              <h5 class="reward-card-title">Apron Barista Sustainable Canvas Sirkula</h5>
+              <p class="reward-card-desc">Apron barista tahan noda yang ditenun dari serat kanvas daur ulang berlogo bordir Green Partner resmi.</p>
+            </div>
+            <button type="button" class="btn-primary" style="width:100%; justify-content:center;" onclick="redeemCafeReward('Apron Barista Sustainable Canvas', 1500)">
+              <i class="fa-solid fa-shirt"></i> Tukar Reward (1.500 Pts)
+            </button>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="reward-card">
+            <div>
+              <div class="reward-card-header">
+                <span class="reward-pts-pill"><i class="fa-solid fa-coins"></i> 750 Pts</span>
+                <span class="badge-role-tag" style="background:#FEF3C7; color:#92400E;">Eco-Merch</span>
+              </div>
+              <h5 class="reward-card-title">Tote Bag Spent Coffee Grounds Canvas</h5>
+              <p class="reward-card-desc">Tote bag kasual tebal berbahan serat organik campuran ampas kopi untuk merchandise promosi kedai.</p>
+            </div>
+            <button type="button" class="btn-primary" style="width:100%; justify-content:center;" onclick="redeemCafeReward('Tote Bag Spent Coffee Fibers', 750)">
+              <i class="fa-solid fa-bag-shopping"></i> Tukar Reward (750 Pts)
+            </button>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="reward-card">
+            <div>
+              <div class="reward-card-header">
+                <span class="reward-pts-pill"><i class="fa-solid fa-coins"></i> 850 Pts</span>
+                <span class="badge-role-tag" style="background:#D1FAE5; color:#065F46;">Display Edukasi</span>
+              </div>
+              <h5 class="reward-card-title">Kit Display Mini-Kumbung Meja Bar Kasir</h5>
+              <p class="reward-card-desc">Kotak jamur tiram transparan hidup yang tumbuh dari formula ampas kopi kedai untuk atraksi visual konsumen.</p>
+            </div>
+            <button type="button" class="btn-primary" style="width:100%; justify-content:center;" onclick="redeemCafeReward('Kit Display Mini-Kumbung Meja Bar', 850)">
+              <i class="fa-solid fa-seedling"></i> Tukar Reward (850 Pts)
+            </button>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="reward-card">
+            <div>
+              <div class="reward-card-header">
+                <span class="reward-pts-pill"><i class="fa-solid fa-coins"></i> 2.500 Pts</span>
+                <span class="badge-role-tag" style="background:#EDE0D4; color:#6F4E37;">Penghargaan Fisik</span>
+              </div>
+              <h5 class="reward-card-title">Plakat Kayu Jati Akrilik Zero Waste Certified</h5>
+              <p class="reward-card-desc">Plakat meja eksklusif kayu jati bersertifikat legalitas komitmen ekonomi sirkular bebas limbah ampas kopi.</p>
+            </div>
+            <button type="button" class="btn-primary" style="width:100%; justify-content:center;" onclick="redeemCafeReward('Plakat Kayu Jati Zero Waste Certified', 2500)">
+              <i class="fa-solid fa-award"></i> Tukar Reward (2.500 Pts)
+            </button>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="reward-card">
+            <div>
+              <div class="reward-card-header">
+                <span class="reward-pts-pill"><i class="fa-solid fa-coins"></i> 1.200 Pts</span>
+                <span class="badge-role-tag" style="background:#CCFBF1; color:#0F766E;">Efisiensi Operasional</span>
+              </div>
+              <h5 class="reward-card-title">Voucher Bebas Retribusi Armada Listrik 1 Bulan</h5>
+              <p class="reward-card-desc">Gratis biaya iuran kontribusi logistik motor listrik selama 30 hari penuh untuk penjemputan terjadwal.</p>
+            </div>
+            <button type="button" class="btn-primary" style="width:100%; justify-content:center;" onclick="redeemCafeReward('Bebas Retribusi Armada Listrik 1 Bulan', 1200)">
+              <i class="fa-solid fa-bolt"></i> Tukar Reward (1.200 Pts)
+            </button>
+          </div>
+        </div>
+
+        <!-- Redemption Log Snippet -->
+        <div style="background:var(--white); border:1px solid var(--slate-200); border-radius:var(--radius-lg); padding:1.25rem 1.5rem;">
+          <h4 style="font-size:0.95rem; font-weight:700; color:var(--slate-800); margin-bottom:0.75rem;">
+            <i class="fa-solid fa-receipt" style="color:var(--primary-600); margin-right:6px;"></i> Riwayat Penukaran Poin Terkini
+          </h4>
+          <div style="display:flex; flex-direction:column; gap:0.5rem; font-size:0.83rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:0.5rem 0; border-bottom:1px solid var(--slate-100);">
               <div>
-                <h3 class="card-title">Pelacak Penjemputan Real-Time</h3>
-                <p class="card-subtitle">Status armada dan penimbangan penjemputan aktif</p>
+                <strong>Voucher Diskon Biji Kopi B2B Rp 100.000</strong>
+                <span style="color:var(--slate-500); display:block; font-size:0.75rem;">Ditukar 10 Sep 2026 • Kode: <code>SRK-VCH-991</code></span>
               </div>
+              <span class="badge-status-done">Terpakai</span>
             </div>
-            <div class="pipeline-badge" id="activeOrderIdTag">Order #SRK-PK-904</div>
-          </div>
-
-          <!-- Interactive Stepper Pipeline -->
-          <div class="pipeline-stepper" id="pipelineStepper">
-            <div class="step-node completed" id="step1">
-              <div class="step-circle"><i class="fa-solid fa-check"></i></div>
-              <div class="step-details">
-                <span class="step-title">1. Dijadwalkan</span>
-                <span class="step-time" id="step1Time">Hari ini, 09:15 WIB</span>
-                <span class="step-desc">Penjemputan terdaftar di sistem Sirkula</span>
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:0.5rem 0;">
+              <div>
+                <strong>Apron Barista Sustainable Canvas Sirkula</strong>
+                <span style="color:var(--slate-500); display:block; font-size:0.75rem;">Ditukar 15 Agu 2026 • Resi Kurir: <code>SRK-LOG-8812</code></span>
               </div>
-            </div>
-
-            <div class="step-connector active" id="conn1"></div>
-
-            <div class="step-node current" id="step2">
-              <div class="step-circle"><i class="fa-solid fa-truck-moving"></i></div>
-              <div class="step-details">
-                <span class="step-title">2. Driver Menuju Lokasi</span>
-                <span class="step-time" id="step2Time">Estimasi Tiba: 14:20 WIB</span>
-                <span class="step-desc">Driver: <strong>Kang Rahmat</strong> (Armada EV B-1492-SRK)</span>
-              </div>
-            </div>
-
-            <div class="step-connector" id="conn2"></div>
-
-            <div class="step-node pending" id="step3">
-              <div class="step-circle"><i class="fa-solid fa-scale-balanced"></i></div>
-              <div class="step-details">
-                <span class="step-title">3. Limbah Ditimbang &amp; Diangkut</span>
-                <span class="step-time">Menunggu penimbangan</span>
-                <span class="step-desc">Timbangan digital terhubung bluetooth</span>
-              </div>
-            </div>
-
-            <div class="step-connector" id="conn3"></div>
-
-            <div class="step-node pending" id="step4">
-              <div class="step-circle"><i class="fa-solid fa-circle-check"></i></div>
-              <div class="step-details">
-                <span class="step-title">4. Selesai (Emisi Terkreditasi)</span>
-                <span class="step-time">Tahap akhir</span>
-                <span class="step-desc">Sertifikat terbit otomatis &amp; poin bertambah</span>
-              </div>
+              <span class="badge-status-done">Diterima</span>
             </div>
           </div>
+        </div>
+      </div>
 
-          <!-- Pipeline Controls for Demo Simulation -->
-          <div class="pipeline-demo-controller">
-            <span class="demo-tag"><i class="fa-solid fa-play"></i> Simulasi Pipeline:</span>
-            <div class="demo-btns">
-              <button class="btn-demo-step" onclick="simulateStep(1)">1. Dijadwalkan</button>
-              <button class="btn-demo-step active" onclick="simulateStep(2)">2. Menuju Lokasi</button>
-              <button class="btn-demo-step" onclick="simulateStep(3)">3. Timbang</button>
-              <button class="btn-demo-step" onclick="simulateStep(4)">4. Selesai</button>
+      <!-- ==================== SUB-TAB 4: PORTFOLIO ESG & GREEN PROMOTION ==================== -->
+      <div id="cafeTabEsg" class="cafe-tab-pane">
+        <!-- ESG Impact Certified Frame -->
+        <div class="esg-cert-frame">
+          <div class="esg-cert-content">
+            <div>
+              <div class="esg-cert-brand">
+                <div class="logo-icon-wrap" style="width:36px; height:36px; background:rgba(255,255,255,0.15);">
+                  <i class="fa-solid fa-leaf text-emerald"></i>
+                </div>
+                <div>
+                  <span style="font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:#D4AF37; font-weight:800; display:block;">Sirkula Verified Eco-Partner</span>
+                  <span style="font-size:0.82rem; color:#CBD5E1;">Nomor Sertifikasi: SRK-ESG-2026-0881</span>
+                </div>
+              </div>
+
+              <h3 class="esg-cert-title">Sertifikat Kemitraan Sirkular Kopi</h3>
+              <h4 class="esg-cert-cafe-name">Kopi Titik Temu — Sudirman Hub</h4>
+              <p class="esg-cert-meta">
+                Terverifikasi secara berkala mengalihkan 100% spent coffee grounds (SCG) ke Bio-Hub Lembang sebagai media tanam baglog jamur tiram lokal, berkontribusi aktif terhadap target <strong>SDG 12 (Konsumsi &amp; Produksi Bertanggung Jawab)</strong> serta pengurangan emisi metana di TPA.
+              </p>
+
+              <div style="display:flex; gap:1rem; flex-wrap:wrap; font-size:0.8rem; color:#F1F5F9;">
+                <div><i class="fa-solid fa-calendar-check text-emerald"></i> Berlaku hingga: <strong>31 Desember 2026</strong></div>
+                <div><i class="fa-solid fa-shield-halved text-emerald"></i> Status Audit: <strong>Compliant (Tier 1 Gold)</strong></div>
+              </div>
+            </div>
+
+            <!-- Digital Seal & QR Box -->
+            <div class="esg-cert-qr-box">
+              <i class="fa-solid fa-qrcode"></i>
+              <strong style="display:block; font-size:0.85rem; color:#0F172A; margin-bottom:2px;">Scan Validasi Publik</strong>
+              <small style="display:block; font-size:0.72rem; color:#64748B; margin-bottom:0.75rem;">Terhubung ke database transparansi emisi Sirkula</small>
+              <button type="button" class="btn-primary" style="width:100%; justify-content:center; font-size:0.8rem; padding:0.45rem 0.75rem;" onclick="copyVerificationLink()">
+                <i class="fa-solid fa-copy"></i> Salin Link Verifikasi
+              </button>
             </div>
           </div>
+        </div>
 
-          <!-- Pickup History Snippet -->
-          <div class="pickup-history-summary">
-            <h4 class="history-title"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat 3 Penjemputan Terakhir</h4>
-            <div class="history-list" id="pickupHistoryList">
-              <div class="history-item">
-                <div class="history-left">
-                  <span class="hist-id">#SRK-PK-892</span>
-                  <span class="hist-date">24 Sep 2026</span>
-                </div>
-                <div class="history-mid">
-                  <span class="hist-weight">28.5 kg SCG</span>
-                  <span class="hist-co2">54.1 kg CO₂e dicegah</span>
-                </div>
-                <span class="badge-status-done">Selesai</span>
-              </div>
-              <div class="history-item">
-                <div class="history-left">
-                  <span class="hist-id">#SRK-PK-880</span>
-                  <span class="hist-date">21 Sep 2026</span>
-                </div>
-                <div class="history-mid">
-                  <span class="hist-weight">32.0 kg SCG</span>
-                  <span class="hist-co2">60.8 kg CO₂e dicegah</span>
-                </div>
-                <span class="badge-status-done">Selesai</span>
-              </div>
+        <!-- 4 Promo & Marketing Action Cards -->
+        <div style="margin-bottom: 1rem;">
+          <h4 style="font-family: var(--font-display); font-size: 1.15rem; color: var(--slate-900); margin-bottom: 0.25rem;">
+            <i class="fa-solid fa-bullhorn" style="color: var(--primary-600); margin-right: 6px;"></i>
+            Perlengkapan Pemasaran Hijau (Green Marketing Kit)
+          </h4>
+          <p style="font-size: 0.85rem; color: var(--slate-600); margin: 0 0 1rem 0;">Manfaatkan komitmen sirkular kedai Anda sebagai nilai tambah branding untuk memikat pelanggan yang sadar lingkungan.</p>
+        </div>
+
+        <div class="esg-promo-grid">
+          <!-- Card 1 -->
+          <div class="esg-promo-card">
+            <div>
+              <div style="font-size:1.8rem; color:#059669; margin-bottom:0.6rem;"><i class="fa-solid fa-table-cells-large"></i></div>
+              <h5 style="font-size:0.98rem; font-weight:700; color:var(--slate-900); margin-bottom:0.35rem;">Table-Tent Meja Kasir</h5>
+              <p style="font-size:0.82rem; color:var(--slate-600); margin-bottom:1rem; line-height:1.5;">Kartu lipat meja ber-QR Code untuk ditaruh di meja kasir dan bar agar pengunjung tahu ampas kopi mereka tidak dibuang ke TPA.</p>
             </div>
+            <button type="button" class="btn-primary" style="width:100%; justify-content:center; font-size:0.82rem;" onclick="openEcoBadgeModal()">
+              <i class="fa-solid fa-eye"></i> Buka &amp; Unduh Eco-Badge
+            </button>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="esg-promo-card">
+            <div>
+              <div style="font-size:1.8rem; color:#E1306C; margin-bottom:0.6rem;"><i class="fa-brands fa-instagram"></i></div>
+              <h5 style="font-size:0.98rem; font-weight:700; color:var(--slate-900); margin-bottom:0.35rem;">Template Story &amp; Feed</h5>
+              <p style="font-size:0.82rem; color:var(--slate-600); margin-bottom:1rem; line-height:1.5;">Aset grafis siap posting berformat 9:16 dan 1:1 berisi capaian 685 kg ampas kopi dan 1.301 kg CO₂e emisi yang telah dicegah.</p>
+            </div>
+            <button type="button" class="btn-secondary" style="width:100%; justify-content:center; font-size:0.82rem;" onclick="showToast('Mengunduh paket grafis media sosial (ZIP format PNG)...', 'info')">
+              <i class="fa-solid fa-download"></i> Unduh Grafis Medsos
+            </button>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="esg-promo-card">
+            <div>
+              <div style="font-size:1.8rem; color:#D97706; margin-bottom:0.6rem;"><i class="fa-solid fa-file-pdf"></i></div>
+              <h5 style="font-size:0.98rem; font-weight:700; color:var(--slate-900); margin-bottom:0.35rem;">Laporan Audit Bulanan</h5>
+              <p style="font-size:0.82rem; color:var(--slate-600); margin-bottom:1rem; line-height:1.5;">Dokumen resmi ringkasan metrik keberlanjutan bersertifikat ISO untuk keperluan laporan manajemen atau audit ESG kedai.</p>
+            </div>
+            <button type="button" class="btn-secondary" style="width:100%; justify-content:center; font-size:0.82rem;" onclick="downloadEsgReport()">
+              <i class="fa-solid fa-file-arrow-down"></i> Unduh Laporan (PDF)
+            </button>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="esg-promo-card">
+            <div>
+              <div style="font-size:1.8rem; color:#0284C7; margin-bottom:0.6rem;"><i class="fa-solid fa-newspaper"></i></div>
+              <h5 style="font-size:0.98rem; font-weight:700; color:var(--slate-900); margin-bottom:0.35rem;">Stiker Pintu Masuk Kedai</h5>
+              <p style="font-size:0.82rem; color:var(--slate-600); margin-bottom:1rem; line-height:1.5;">Desain stiker kaca pintu masuk kedai "Kedai Bersertifikat Ekonomi Sirkular Sirkula 2026" dalam resolusi cetak tinggi.</p>
+            </div>
+            <button type="button" class="btn-secondary" style="width:100%; justify-content:center; font-size:0.82rem;" onclick="showToast('Mengunduh file master stiker kaca pintu kedai (PDF Vektor)...', 'info')">
+              <i class="fa-solid fa-file-image"></i> Unduh Stiker Pintu
+            </button>
           </div>
         </div>
       </div>
@@ -1051,15 +1972,90 @@
         </div>
       </div>
 
+      <!-- Farmer Metrics Summary -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-top">
+            <span class="metric-title">Total Baglog Produktif</span>
+            <div class="metric-icon-circle green-soft">
+              <i class="fa-solid fa-boxes-stacked"></i>
+            </div>
+          </div>
+          <div class="metric-main">
+            <h3 class="metric-number">6.500</h3>
+            <span class="metric-unit">unit</span>
+          </div>
+          <div class="metric-footer">
+            <span class="text-positive"><i class="fa-solid fa-arrow-trend-up"></i> 81% Kapasitas Kumbung</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-top">
+            <span class="metric-title">Estimasi Panen Bulan Ini</span>
+            <div class="metric-icon-circle brown-soft">
+              <i class="fa-solid fa-weight-hanging"></i>
+            </div>
+          </div>
+          <div class="metric-main">
+            <h3 class="metric-number">1.250</h3>
+            <span class="metric-unit">kg jamur</span>
+          </div>
+          <div class="metric-footer">
+            <span>Potensi omset: <strong>Rp 18.750.000</strong></span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-top">
+            <span class="metric-title">Monitoring Mikroklimat IoT</span>
+            <div class="metric-icon-circle blue-soft">
+              <i class="fa-solid fa-temperature-half"></i>
+            </div>
+          </div>
+          <div class="metric-main">
+            <h3 class="metric-number">24.2°C</h3>
+            <span class="metric-unit">RH 86%</span>
+          </div>
+          <div class="metric-footer">
+            <span class="text-positive"><i class="fa-solid fa-circle-check"></i> Kondisi Optimal Terpantau</span>
+          </div>
+        </div>
+
+        <div class="metric-card" style="border: 1px dashed #d97706; background: #fffdfa;">
+          <div class="metric-top">
+            <span class="metric-title" style="color: #92400e;">Penyerapan Panen (Buyback)</span>
+            <div class="metric-icon-circle orange-soft">
+              <i class="fa-solid fa-timeline"></i>
+            </div>
+          </div>
+          <div class="metric-main">
+            <h3 class="metric-number" style="font-size: 1.2rem; color: #b45309;">Tahun ke-3</h3>
+            <span class="metric-unit" style="color: #92400e;">Roadmap</span>
+          </div>
+          <div class="metric-footer">
+            <span style="color: #b45309; font-size: 0.8rem;"><i class="fa-solid fa-snowflake"></i> Future Dev (Cold-Chain System)</span>
+          </div>
+        </div>
+      </div>
+
       <!-- Farmer Portal Navigation Tabs -->
       <div class="farmer-tabs-bar">
         <button class="farmer-nav-btn active" id="fNavStore" onclick="switchFarmerTab('store')">
-          <i class="fa-solid fa-store"></i>
-          <span>Fitur 2: Toko Grosir Baglog Termurah</span>
+          <i class="fa-solid fa-boxes-stacked"></i>
+          <span>Fitur 1: Grosir Baglog Terformulasi</span>
         </button>
         <button class="farmer-nav-btn" id="fNavCalc" onclick="switchFarmerTab('calc')">
-          <i class="fa-solid fa-chart-line"></i>
-          <span>Fitur 3: Kalkulator Panen &amp; Garansi</span>
+          <i class="fa-solid fa-calculator"></i>
+          <span>Fitur 2: Kalkulator Panen &amp; Garansi</span>
+        </button>
+        <button class="farmer-nav-btn" id="fNavIot" onclick="switchFarmerTab('iot')">
+          <i class="fa-solid fa-temperature-half"></i>
+          <span>Fitur 3: Monitoring IoT Kumbung</span>
+        </button>
+        <button class="farmer-nav-btn" id="fNavBuyback" onclick="switchFarmerTab('buyback')">
+          <i class="fa-solid fa-timeline"></i>
+          <span>Roadmap Buyback (Th. 3)</span>
         </button>
       </div>
 
@@ -1131,10 +2127,17 @@
                   </div>
                 </div>
                 <div class="spec-item">
+                  <i class="fa-solid fa-microchip"></i>
+                  <div>
+                    <strong>Dukungan Monitoring IoT</strong>
+                    <span>Pemantauan suhu &amp; kelembapan terhubung aplikasi</span>
+                  </div>
+                </div>
+                <div class="spec-item">
                   <i class="fa-solid fa-shield-virus"></i>
                   <div>
-                    <strong>Garansi 100% Ganti Baru</strong>
-                    <span>Klaim langsung jika rusak dalam 14 hari</span>
+                    <strong>Garansi Penggantian Substrat</strong>
+                    <span>Klaim terverifikasi jika miselium tidak aktif dlm 14 hari</span>
                   </div>
                 </div>
               </div>
@@ -1200,7 +2203,7 @@
                   </div>
                   <div class="logistic-row">
                     <span><i class="fa-solid fa-coins"></i> Subsidi Biaya Kirim:</span>
-                    <strong class="text-emerald">Gratis Ongkir (Order &gt; 1.500 pcs)</strong>
+                    <strong class="text-emerald">Subsidi Biaya Kirim (Order &gt; 1.500 pcs)</strong>
                   </div>
                 </div>
               </div>
@@ -1337,7 +2340,7 @@
               <div class="support-icon"><i class="fa-solid fa-list-check"></i></div>
               <div>
                 <h4 class="support-title">Panduan SOP &amp; Checklist Perawatan Kumbung</h4>
-                <p class="support-sub">Pantau checklist harian untuk menjamin kualitas panen 100%</p>
+                <p class="support-sub">Pantau checklist harian untuk membantu mengoptimalkan kualitas panen</p>
               </div>
             </div>
 
@@ -1393,7 +2396,7 @@
               <div class="support-icon text-red"><i class="fa-solid fa-shield-virus"></i></div>
               <div>
                 <h4 class="support-title">Tiket Klaim Garansi &amp; Konsultasi Hama</h4>
-                <p class="support-sub">Kebijakan Sirkula: 100% ganti baru jika terkontaminasi &le; 14 hari</p>
+                <p class="support-sub">Kebijakan Sirkula: Garansi penggantian substrat jika terindikasi kontaminasi &le; 14 hari pasca serah terima</p>
               </div>
             </div>
 
@@ -1438,6 +2441,185 @@
           </div>
         </div>
       </div>
+
+      <!-- SUB-TAB 3: FEATURE - IOT TELEMETRY & DECISION SUPPORT -->
+      <div id="farmerTabIot" class="farmer-tab-pane">
+        <div id="iot-telemetry" class="dash-card">
+          <div class="dash-card-header">
+            <div class="header-icon-title">
+              <div class="header-icon" style="background:#E0F2FE; color:#0284C7;">
+                <i class="fa-solid fa-temperature-half"></i>
+              </div>
+              <div>
+                <h3 class="card-title">Monitoring Mikroklimat Berbasis IoT (Suhu &amp; Kelembapan)</h3>
+                <p class="card-subtitle">Monitoring berbasis IoT membantu petani mengambil keputusan budidaya berdasarkan data terukur.</p>
+              </div>
+            </div>
+            <span class="badge-pill-online"><i class="fa-solid fa-circle"></i> Sensor Terhubung</span>
+          </div>
+
+          <!-- Notice: Decision Support not Full Automation -->
+          <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px 14px; margin-bottom: 20px; font-size: 0.88rem; color: #166534;">
+            <strong style="color: #14532d; display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+              <i class="fa-solid fa-circle-info"></i> Prinsip Integrasi IoT Sirkula
+            </strong>
+            Baglog jamur tiram Sirkula terintegrasi dengan sensor mikroklimat untuk memantau suhu, kelembapan (RH), dan ventilasi lingkungan. Data real-time membantu petani mengetahui kondisi budidaya secara lebih terukur guna menentukan waktu pengkabutan dan sanitasi yang tepat tanpa klaim otomatisasi penuh yang prematur.
+          </div>
+
+          <!-- Real-Time Telemetry Sensor Grid -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <span style="font-size: 0.85rem; color: #64748B; font-weight: 600;">Suhu Kumbung</span>
+                <i class="fa-solid fa-temperature-three-quarters" style="color: #0284C7; font-size: 1.25rem;"></i>
+              </div>
+              <div style="font-size: 1.75rem; font-weight: 800; color: #0F172A; font-family: var(--font-display);">24.2°C</div>
+              <div style="font-size: 0.8rem; color: #059669; margin-top: 0.25rem;"><i class="fa-solid fa-check"></i> Rentang Ideal (22°C - 28°C)</div>
+            </div>
+
+            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <span style="font-size: 0.85rem; color: #64748B; font-weight: 600;">Kelembapan Udara (RH)</span>
+                <i class="fa-solid fa-droplet" style="color: #0D9488; font-size: 1.25rem;"></i>
+              </div>
+              <div style="font-size: 1.75rem; font-weight: 800; color: #0F172A; font-family: var(--font-display);">86%</div>
+              <div style="font-size: 0.8rem; color: #059669; margin-top: 0.25rem;"><i class="fa-solid fa-check"></i> Rentang Ideal (80% - 90%)</div>
+            </div>
+
+            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <span style="font-size: 0.85rem; color: #64748B; font-weight: 600;">Sirkulasi Udara</span>
+                <i class="fa-solid fa-wind" style="color: #2563EB; font-size: 1.25rem;"></i>
+              </div>
+              <div style="font-size: 1.75rem; font-weight: 800; color: #0F172A; font-family: var(--font-display);">0.4 m/s</div>
+              <div style="font-size: 0.8rem; color: #059669; margin-top: 0.25rem;"><i class="fa-solid fa-check"></i> Ventilasi Pasif Normal</div>
+            </div>
+
+            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <span style="font-size: 0.85rem; color: #64748B; font-weight: 600;">Kondisi Substrat SCG</span>
+                <i class="fa-solid fa-seedling" style="color: #16A34A; font-size: 1.25rem;"></i>
+              </div>
+              <div style="font-size: 1.75rem; font-weight: 800; color: #0F172A; font-family: var(--font-display);">Sehat</div>
+              <div style="font-size: 0.8rem; color: #059669; margin-top: 0.25rem;"><i class="fa-solid fa-check"></i> Miselium Merambat Aktif</div>
+            </div>
+          </div>
+
+          <!-- Farmer Decision Recommendations -->
+          <div style="background: #F8FAFC; border-radius: 12px; border: 1px solid #E2E8F0; padding: 1.25rem;">
+            <h4 style="font-size: 0.95rem; font-weight: 700; color: #1E293B; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+              <i class="fa-solid fa-lightbulb" style="color: #D97706;"></i> Rekomendasi Terukur Berdasarkan Data Sensor Hari Ini:
+            </h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.75rem;">
+              <div style="display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.85rem; color: #475569;">
+                <i class="fa-solid fa-circle-check" style="color: #059669; margin-top: 3px;"></i>
+                <span>Kelembapan 86% tercukupi: Pengkabutan kabut air cukup dilakukan 1x sore hari nanti.</span>
+              </div>
+              <div style="display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.85rem; color: #475569;">
+                <i class="fa-solid fa-circle-check" style="color: #059669; margin-top: 3px;"></i>
+                <span>Suhu 24.2°C stabil: Pertahankan sirkulasi kisi-kisi bambu kumbung tetap terbuka.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-TAB 4: FEATURE - BUYBACK ROADMAP & COLD-CHAIN -->
+      <div id="farmerTabBuyback" class="farmer-tab-pane">
+        <div id="buyback" class="dash-card">
+          <div class="dash-card-header">
+            <div class="header-icon-title">
+              <div class="header-icon" style="background:#FEF3C7; color:#D97706;">
+                <i class="fa-solid fa-snowflake"></i>
+              </div>
+              <div>
+                <span class="badge-pill-xs" style="background:#FEF3C7; color:#92400E; font-weight:700; padding:2px 8px; border-radius:4px; margin-bottom:4px; display:inline-block;">Roadmap Tahun Ketiga (Future Development)</span>
+                <h3 class="card-title">Mekanisme Buyback &amp; Standar Rantai Dingin (Cold-Chain)</h3>
+                <p class="card-subtitle">Rencana penyerapan hasil panen jamur tiram mitra setelah ekosistem dan sistem sirkular Sirkula matang.</p>
+              </div>
+            </div>
+          </div>
+
+          <p style="font-size: 0.95rem; color: #475569; line-height: 1.6; margin-bottom: 1.5rem;">
+            Sirkula berencana mengembangkan mekanisme buyback untuk mengambil kembali produk/hasil budidaya tertentu dari mitra petani binaan sehingga alur ekonomi sirkular dapat berjalan lebih optimal. Mengingat jamur tiram merupakan komoditas segar yang relatif mudah rusak (perishable), sistem logistik buyback tidak dapat diperlakukan seperti barang biasa, melainkan membutuhkan 4 pilar infrastruktur rantai dingin:
+          </p>
+
+          <!-- 4 Cold Chain Pillars Grid -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 1.25rem;">
+              <div style="font-size: 1.5rem; color: #0284C7; margin-bottom: 0.5rem;"><i class="fa-solid fa-box-open"></i></div>
+              <h4 style="font-size: 1rem; font-weight: 700; color: #1E293B; margin-bottom: 0.25rem;">1. Packaging Khusus</h4>
+              <p style="font-size: 0.85rem; color: #64748B; margin: 0;">Kemasan mikro-perforasi food-grade untuk menjaga sirkulasi kelembapan dan respirasi jamur tanpa kondensasi berlebih.</p>
+            </div>
+            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 1.25rem;">
+              <div style="font-size: 1.5rem; color: #0D9488; margin-bottom: 0.5rem;"><i class="fa-solid fa-temperature-arrow-down"></i></div>
+              <h4 style="font-size: 1rem; font-weight: 700; color: #1E293B; margin-bottom: 0.25rem;">2. Box Kontrol Suhu</h4>
+              <p style="font-size: 0.85rem; color: #64748B; margin: 0;">Container/box berinsulasi thermal khusus untuk mempertahankan kestabilan suhu sejuk selama pengangkutan dari kumbung.</p>
+            </div>
+            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 1.25rem;">
+              <div style="font-size: 1.5rem; color: #2563EB; margin-bottom: 0.5rem;"><i class="fa-solid fa-snowflake"></i></div>
+              <h4 style="font-size: 1rem; font-weight: 700; color: #1E293B; margin-bottom: 0.25rem;">3. Cold-Chain Terpadu</h4>
+              <p style="font-size: 0.85rem; color: #64748B; margin: 0;">Sistem pendinginan terintegrasi (2°C - 5°C) untuk mencegah pencoklatan tudung dan pembusukan batang jamur tiram.</p>
+            </div>
+            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 1.25rem;">
+              <div style="font-size: 1.5rem; color: #D97706; margin-bottom: 0.5rem;"><i class="fa-solid fa-stopwatch"></i></div>
+              <h4 style="font-size: 1rem; font-weight: 700; color: #1E293B; margin-bottom: 0.25rem;">4. Waktu Tempuh Terkontrol</h4>
+              <p style="font-size: 0.85rem; color: #64748B; margin: 0;">Distribusi dengan batasan waktu tempuh ketat agar jamur tiba di hub agregasi dalam kondisi segar standar grade A.</p>
+            </div>
+          </div>
+
+          <!-- 3-Year Circular Roadmap Timeline Card -->
+          <div style="background: #F1F5F9; border-radius: 12px; padding: 1.5rem; border: 1px solid #CBD5E1;">
+            <h4 style="font-size: 1.05rem; font-weight: 700; color: #1E293B; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+              <i class="fa-solid fa-timeline" style="color: #059669;"></i> Tahapan Roadmap Sirkula (Tahun 1 - 3)
+            </h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
+              <!-- Year 1 -->
+              <div style="background: white; border-radius: 8px; padding: 1rem; border-left: 4px solid #059669; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <span style="font-size: 0.75rem; font-weight: 800; color: #059669; text-transform: uppercase;">Year 1 (Fase Saat Ini)</span>
+                <h5 style="font-size: 0.95rem; font-weight: 700; color: #0F172A; margin: 0.25rem 0 0.5rem;">Pembangunan Ekosistem &amp; IoT</h5>
+                <ul style="font-size: 0.82rem; color: #475569; margin: 0; padding-left: 1.2rem; line-height: 1.5;">
+                  <li>Pembangunan ekosistem mitra kedai &amp; petani</li>
+                  <li>Digitalisasi alur penjemputan dan grosir baglog</li>
+                  <li>Monitoring kondisi budidaya berbasis IoT</li>
+                  <li>Pembentukan kelompok tani mitra binaan</li>
+                </ul>
+              </div>
+              <!-- Year 2 -->
+              <div style="background: white; border-radius: 8px; padding: 1rem; border-left: 4px solid #0284C7; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <span style="font-size: 0.75rem; font-weight: 800; color: #0284C7; text-transform: uppercase;">Year 2 (Ekspansi &amp; Efisiensi)</span>
+                <h5 style="font-size: 0.95rem; font-weight: 700; color: #0F172A; margin: 0.25rem 0 0.5rem;">Scale-Up &amp; Optimalisasi Operasional</h5>
+                <ul style="font-size: 0.82rem; color: #475569; margin: 0; padding-left: 1.2rem; line-height: 1.5;">
+                  <li>Scale-up volume ampas kopi dan produksi baglog</li>
+                  <li>Optimalisasi operasional &amp; efisiensi logistik</li>
+                  <li>Perluasan jaringan kemitraan wilayah aglomerasi</li>
+                  <li>Evaluasi konsumsi daya dan transisi armada bertahap</li>
+                </ul>
+              </div>
+              <!-- Year 3 -->
+              <div style="background: white; border-radius: 8px; padding: 1rem; border-left: 4px solid #D97706; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <span style="font-size: 0.75rem; font-weight: 800; color: #D97706; text-transform: uppercase;">Year 3 (Future Development)</span>
+                <h5 style="font-size: 0.95rem; font-weight: 700; color: #0F172A; margin: 0.25rem 0 0.5rem;">Sistem Buyback &amp; Cold-Chain</h5>
+                <ul style="font-size: 0.82rem; color: #475569; margin: 0; padding-left: 1.2rem; line-height: 1.5;">
+                  <li>Pengembangan sistem buyback hasil panen mitra</li>
+                  <li>Reverse logistics dengan kemasan khusus jamur tiram</li>
+                  <li>Infrastruktur cold-chain dengan kontrol suhu terpadu</li>
+                  <li>Penguatan circular economy hulu-ke-hilir</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 1.25rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; padding-top: 1rem; border-top: 1px solid #E2E8F0;">
+            <span style="font-size: 0.85rem; color: #64748B;">
+              <i class="fa-solid fa-circle-info" style="color: #0284C7; margin-right: 4px;"></i> Status: Direncanakan pada roadmap Tahun ke-3 Sirkula.
+            </span>
+            <button type="button" class="btn-secondary" onclick="showToast('Sistem Buyback direncanakan untuk Roadmap Tahun ke-3 setelah ekosistem cold-chain teruji.', 'info')">
+              <i class="fa-solid fa-comments"></i> Konsultasi Rencana Kemitraan Th. 3
+            </button>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ==================== VIEW 4: OPERATOR BIO-HUB VIEW ==================== -->
@@ -1470,7 +2652,7 @@
       </div>
 
       <!-- BioHub Impact & Telemetry Metric Cards -->
-      <div class="metrics-grid">
+      <div class="metrics-grid" id="esg-balance">
         <div class="metric-card">
           <div class="metric-top">
             <span class="metric-title">Batch Aktif Saat Ini</span>
@@ -1539,7 +2721,7 @@
       <!-- Main Operational Layout: Inflow (Ampas SCG) & Outflow (Baglog Matang) -->
       <div class="dashboard-columns">
         <!-- Column 1: Incoming Pickups Queue -->
-        <div class="dash-card">
+        <div class="dash-card" id="fleet-map">
           <div class="dash-card-header">
             <div class="header-icon-title">
               <div class="header-icon" style="background:#E0F2FE; color:#0284C7;">
@@ -1601,7 +2783,7 @@
         </div>
 
         <!-- Column 2: Outgoing Baglog Orders -->
-        <div class="dash-card">
+        <div class="dash-card" id="qa-lab">
           <div class="dash-card-header">
             <div class="header-icon-title">
               <div class="header-icon" style="background:#ECFDF5; color:#059669;">
@@ -1639,7 +2821,7 @@
             </div>
 
             <!-- Kiln Telemetry Mini Panel -->
-            <div class="kiln-telemetry-banner">
+            <div class="kiln-telemetry-banner" id="reactor">
               <div class="ktb-left">
                 <i class="fa-solid fa-microchip"></i>
                 <div>
@@ -1654,6 +2836,114 @@
       </div>
     </section>
   </main>
+
+  <!-- ==================== SITE FOOTER (FULL-WIDTH & COMPREHENSIVE) ==================== -->
+  <footer class="site-footer" id="siteFooter">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <!-- Brand & Mission Column -->
+        <div class="footer-col brand-col">
+          <div class="footer-logo">
+            <div class="logo-icon-wrap" style="width:40px; height:40px;">
+              <i class="fa-solid fa-recycle eco-loop" style="font-size:1.2rem;"></i>
+              <i class="fa-solid fa-mug-hot coffee-icon" style="font-size:0.75rem; top:12px;"></i>
+            </div>
+            <div class="brand-text">
+              <span class="brand-title" style="font-size:1.35rem;">Sirkula<span class="dot-accent">.</span></span>
+              <span class="brand-sub">Sirkular Kopi &amp; Tanam</span>
+            </div>
+          </div>
+          <p class="footer-about">
+            Platform digital ekonomi sirkular B2B yang menghubungkan residu ampas kopi perkotaan dengan formulasi media tanam baglog jamur tiram berdaya hasil tinggi bagi petani lokal secara terukur dan berkelanjutan.
+          </p>
+          <div class="footer-sdg-row">
+            <span class="sdg-pill-mini sdg-badge-gold"><i class="fa-solid fa-arrows-rotate"></i> SDG 12: Konsumsi &amp; Produksi Bertanggung Jawab</span>
+            <span class="sdg-pill-mini sdg-badge-green"><i class="fa-solid fa-leaf"></i> SDG 8: Pertumbuhan Ekonomi Berkelanjutan</span>
+          </div>
+          <div class="footer-social-row">
+            <a href="#" class="footer-social-link" onclick="showToast('Instagram: @sirkula.id', 'info'); return false;" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="footer-social-link" onclick="showToast('LinkedIn: Sirkula Indonesia B2B', 'info'); return false;" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="footer-social-link" onclick="showToast('WhatsApp Kemitraan: +62 812-3456-7890', 'info'); return false;" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="#" class="footer-social-link" onclick="showToast('GitHub: github.com/sirkula-circular', 'info'); return false;" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Navigation Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Navigasi Platform</h4>
+          <ul class="footer-links">
+            <li><a href="#circular-flow" onclick="navigateToSection('circular-flow'); return false;"><i class="fa-solid fa-chevron-right"></i> Alur Sirkular (Closed-Loop)</a></li>
+            <li><a href="#impact-simulator" onclick="navigateToSection('impact-simulator'); return false;"><i class="fa-solid fa-chevron-right"></i> Simulator Formula SCG-20</a></li>
+            <li><a href="#kalkulator-interaktif" onclick="navigateToSection('kalkulator-interaktif'); return false;"><i class="fa-solid fa-chevron-right"></i> Kalkulator Dampak &amp; Biaya</a></li>
+            <li><a href="#testimoni" onclick="navigateToSection('testimoni'); return false;"><i class="fa-solid fa-chevron-right"></i> Testimoni Mitra</a></li>
+            <li><a href="#faq" onclick="navigateToSection('faq'); return false;"><i class="fa-solid fa-chevron-right"></i> Tanya Jawab (FAQ)</a></li>
+          </ul>
+        </div>
+
+        <!-- Stakeholder Portals Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Portal Pemangku Kepentingan</h4>
+          <ul class="footer-links">
+            <li><a href="#upstream" onclick="switchRole('upstream'); return false;"><i class="fa-solid fa-mug-saucer"></i> Portal Kedai Kopi (Upstream)</a></li>
+            <li><a href="#downstream" onclick="switchRole('downstream'); return false;"><i class="fa-solid fa-seedling"></i> Portal Petani Jamur (Downstream)</a></li>
+            <li><a href="#biohub" onclick="switchRole('biohub'); return false;"><i class="fa-solid fa-microchip"></i> Bio-Hub Central Command</a></li>
+            <li><a href="#auth" onclick="openAuthPage('daftar'); return false;"><i class="fa-solid fa-user-plus"></i> Daftar Kemitraan B2B</a></li>
+            <li><a href="#esg" onclick="openEcoBadgeModal(); return false;"><i class="fa-solid fa-award"></i> Sertifikat &amp; Eco-Badge</a></li>
+          </ul>
+        </div>
+
+        <!-- Location & Contact Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Fasilitas &amp; Kontak</h4>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <div>
+              <strong>Bio-Hub Sentral Lembang:</strong>
+              <div class="footer-contact-sub">Ds. Cibodas, Lembang, Kab. Bandung Barat, Jawa Barat</div>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-building"></i>
+            <div>
+              <strong>Kantor Operasional:</strong>
+              <div class="footer-contact-sub">Jl. Jend. Sudirman Kav. 52-53, Jakarta Selatan</div>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-envelope"></i>
+            <div>
+              <strong>Email Kemitraan:</strong>
+              <div class="footer-contact-sub text-emerald">kemitraan@sirkula.id</div>
+            </div>
+          </div>
+          <div class="footer-live-badge">
+            <span class="live-pulse"></span>
+            <div>
+              <strong>Sistem Sirkula Terintegrasi</strong>
+              <div class="footer-live-sub">Bio-Hub Kiln &amp; Telemetri IoT Online</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div class="footer-copyright-text">
+          &copy; 2026 PT Sirkula Ekosistem Indonesia. Hak Cipta Dilindungi Undang-Undang. Model Ekonomi Sirkular Terintegrasi.
+        </div>
+        <div class="footer-bottom-links">
+          <a href="#" onclick="showToast('Kebijakan Privasi Sirkula terdaftar resmi di Kominfo.', 'info'); return false;">Kebijakan Privasi</a>
+          <span class="footer-dot-divider">•</span>
+          <a href="#" onclick="showToast('Syarat & Ketentuan Kemitraan B2B Sirkula.', 'info'); return false;">Syarat Layanan</a>
+          <span class="footer-dot-divider">•</span>
+          <a href="#" onclick="showToast('Standar Kepatuhan SOP ISO 14001 & ISO 9001.', 'info'); return false;">SOP Lingkungan</a>
+          <span class="footer-dot-divider">•</span>
+          <a href="#topNav" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;" class="footer-back-to-top">
+            <i class="fa-solid fa-arrow-up"></i> Kembali ke Atas
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <!-- ==================== ECO-BADGE MODAL (SHAREABLE COUNTER BADGE) ==================== -->
   <div class="modal-backdrop" id="ecoBadgeModal" onclick="handleBackdropClick(event, 'ecoBadgeModal')">
@@ -1702,7 +2992,7 @@
             </div>
 
             <div class="eco-sdg-row">
-              <span class="sdg-pill-mini" style="background:#059669;color:white;"><i class="fa-solid fa-leaf"></i> Zero-Waste Coffee</span>
+              <span class="sdg-pill-mini" style="background:#059669;color:white;"><i class="fa-solid fa-leaf"></i> Circular Coffee Partner</span>
               <span class="sdg-pill-mini" style="background:#6F4E37;color:white;"><i class="fa-solid fa-seedling"></i> Dukung Petani Lokal</span>
             </div>
           </div>
@@ -1779,7 +3069,7 @@
 
           <div class="checkout-guarantee-note">
             <i class="fa-solid fa-shield-check"></i>
-            <span>Pesanan Anda dilindungi <strong>Garansi 100% Ganti Baru</strong> bila miselium tidak merambat aktif dalam 14 hari pasca serah terima.</span>
+            <span>Pesanan Anda dilindungi <strong>Garansi Penggantian Substrat</strong> bila miselium tidak merambat aktif dalam 14 hari pasca serah terima.</span>
           </div>
         </div>
 
@@ -1921,26 +3211,6 @@
       </div>
     </div>
   </div>
-
-  <!-- ==================== FLOATING DEMO ROLE SWITCHER BAR ==================== -->
-  <aside class="floating-role-bar" id="floatingRoleBar" aria-label="Demo Role Switcher">
-    <div class="role-bar-label">
-      <i class="fa-solid fa-wand-magic-sparkles"></i>
-      <span>Demo Peran:</span>
-    </div>
-    <button class="role-bar-btn active" id="barBtnLanding" onclick="switchRole('landing')">
-      <i class="fa-solid fa-globe"></i> Overview Publik
-    </button>
-    <button class="role-bar-btn" id="barBtnUpstream" onclick="switchRole('upstream')">
-      <i class="fa-solid fa-mug-saucer"></i> Kedai Kopi
-    </button>
-    <button class="role-bar-btn" id="barBtnDownstream" onclick="switchRole('downstream')">
-      <i class="fa-solid fa-seedling"></i> Petani Jamur
-    </button>
-    <button class="role-bar-btn" id="barBtnBiohub" onclick="switchRole('biohub')">
-      <i class="fa-solid fa-microchip"></i> BioHub Central
-    </button>
-  </aside>
 
   <!-- ==================== TOAST NOTIFICATION CONTAINER ==================== -->
   <div class="toast-container" id="toastContainer"></div>

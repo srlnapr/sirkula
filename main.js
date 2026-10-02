@@ -8,6 +8,15 @@
 // AUTH: DEMO USER PRESETS
 // ==========================================================================
 const DEMO_USERS = {
+  landing: {
+    name: 'Overview Publik',
+    subtitle: 'Ekosistem Sirkula Terbuka',
+    role: 'landing',
+    roleLabel: 'Publik',
+    email: 'tamu@sirkula.id',
+    avatar: 'S',
+    avatarBg: '#059669'
+  },
   upstream: {
     name: 'Kopi Titik Koma',
     subtitle: 'Cabang Sudirman, Jakarta',
@@ -62,7 +71,7 @@ const appState = {
   pickupPipeline: {
     orderId: '#SRK-PK-904',
     currentStep: 2, // 1: Dijadwalkan, 2: Menuju Lokasi, 3: Ditimbang, 4: Selesai
-    driverName: 'Kang Rahmat (Armada EV B-1492-SRK)'
+    driverName: 'Kang Rahmat (Armada Listrik Uji Rute B-1492-SRK)'
   },
 
   // Formula Simulator
@@ -79,6 +88,8 @@ document.addEventListener('DOMContentLoaded', () => {
   updateWholesaleCalculation(2000, 'init');
   generateEcoBadgeQr();
   initAuthFromStorage(); // Restore session from localStorage
+  handleHashRoute(); // Initialize route from URL hash if provided
+  window.addEventListener('hashchange', handleHashRoute);
 
   // Close auth dropdown when clicking outside
   document.addEventListener('click', (e) => {
@@ -92,6 +103,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Expose global functions to window for inline HTML onclick handlers
   window.switchRole = switchRole;
   window.switchFarmerTab = switchFarmerTab;
+  window.switchCafeTab = switchCafeTab;
+  window.requestSmartBinAction = requestSmartBinAction;
+  window.redeemCafeReward = redeemCafeReward;
+  window.requestSupplies = requestSupplies;
+  window.downloadEsgReport = downloadEsgReport;
+  window.copyVerificationLink = copyVerificationLink;
   window.updateFormulaSimulation = updateFormulaSimulation;
   window.setPresetWeight = setPresetWeight;
   window.handleSchedulePickup = handleSchedulePickup;
@@ -125,12 +142,24 @@ document.addEventListener('DOMContentLoaded', () => {
   window.handleEmailRegister = handleEmailRegister;
   window.togglePasswordVisibility = togglePasswordVisibility;
   window.toggleAuthMenu = toggleAuthMenu;
+  window.closeAuthDropdown = closeAuthDropdown;
   // Auth Page (full-page) functions
   window.openAuthPage = openAuthPage;
   window.switchAuthPageTab = switchAuthPageTab;
   window.selectRegRole = selectRegRole;
   window.handlePageEmailLogin = handlePageEmailLogin;
   window.handlePageEmailRegister = handlePageEmailRegister;
+
+  // Navigation helpers
+  window.navigateToSection = navigateToSection;
+  window.toggleMobileNav = toggleMobileNav;
+  window.closeMobileNav = closeMobileNav;
+
+  // Landing interactive features
+  window.switchLandingCalcTab = switchLandingCalcTab;
+  window.updateLandingCafeCalc = updateLandingCafeCalc;
+  window.updateLandingFarmerCalc = updateLandingFarmerCalc;
+  window.toggleFaq = toggleFaq;
 });
 
 // Set default dates
@@ -177,46 +206,31 @@ function switchRole(role, subTab = null) {
     navGroups[role].style.display = 'flex';
   }
 
-  // 2. Sync Floating Demo Role Switcher Buttons
-  const barBtns = {
-    landing: document.getElementById('barBtnLanding'),
-    upstream: document.getElementById('barBtnUpstream'),
-    downstream: document.getElementById('barBtnDownstream'),
-    biohub: document.getElementById('barBtnBiohub')
-  };
-
-  Object.entries(barBtns).forEach(([key, btn]) => {
-    if (btn) {
-      if (key === role) {
-        btn.classList.add('active');
-      } else {
-        btn.classList.remove('active');
-      }
-    }
-  });
+  // Sync state and profile pill in top navbar
+  appState.activeRole = role;
+  updateAuthNavbar(DEMO_USERS[role] || DEMO_USERS.landing);
 
   // 3. All views to hide first
   const allViews = ['viewLanding','viewUpstream','viewDownstream','viewBiohub','viewAuth'];
   allViews.forEach(id => document.getElementById(id)?.classList.remove('active'));
 
-  // Show/hide navbar based on view
+  // Show/hide navbar and footer based on view
   const topNav = document.getElementById('topNav');
+  const siteFooter = document.getElementById('siteFooter');
 
   if (role === 'auth') {
-    // Full-page auth: hide top nav and floating bar
+    // Full-page auth: hide top nav and footer
     if (topNav) topNav.style.display = 'none';
-    const floatingBar = document.getElementById('floatingRoleBar');
-    if (floatingBar) floatingBar.style.display = 'none';
+    if (siteFooter) siteFooter.style.display = 'none';
     document.getElementById('viewAuth')?.classList.add('active');
     window.location.hash = 'auth';
     document.body.style.overflow = 'auto';
     return;
   }
 
-  // Restore nav for all other views
+  // Restore nav and footer for all other views
   if (topNav) topNav.style.display = '';
-  const floatingBar = document.getElementById('floatingRoleBar');
-  if (floatingBar) floatingBar.style.display = 'flex';
+  if (siteFooter) siteFooter.style.display = '';
 
   if (role === 'landing') {
     document.getElementById('viewLanding')?.classList.add('active');
@@ -224,36 +238,349 @@ function switchRole(role, subTab = null) {
   } else if (role === 'upstream') {
     document.getElementById('viewUpstream')?.classList.add('active');
     window.location.hash = 'upstream';
+    if (subTab) {
+      switchCafeTab(subTab);
+    }
   } else if (role === 'downstream') {
     document.getElementById('viewDownstream')?.classList.add('active');
     window.location.hash = 'downstream';
-    if (subTab) switchFarmerTab(subTab === 'catalog' ? 'store' : 'calc');
+    if (subTab) {
+      if (subTab === 'catalog') switchFarmerTab('store');
+      else if (subTab === 'calculator') switchFarmerTab('calc');
+      else if (subTab === 'iot') switchFarmerTab('iot');
+      else if (subTab === 'buyback') switchFarmerTab('buyback');
+      else switchFarmerTab(subTab);
+    }
   } else if (role === 'biohub') {
     document.getElementById('viewBiohub')?.classList.add('active');
     window.location.hash = 'biohub';
   }
 
+  // Update mobile drawer links to match the new role
+  syncMobileNav();
+  closeMobileNav();
+
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Sub-Tab Switcher for Cafe Upstream Portal
+function switchCafeTab(tabKey) {
+  appState.activeCafeTab = tabKey;
+  const tabMap = {
+    pickup: { btn: 'cNavPickup', pane: 'cafeTabPickup' },
+    bins: { btn: 'cNavBins', pane: 'cafeTabBins' },
+    rewards: { btn: 'cNavRewards', pane: 'cafeTabRewards' },
+    esg: { btn: 'cNavEsg', pane: 'cafeTabEsg' }
+  };
+
+  Object.entries(tabMap).forEach(([key, ids]) => {
+    const btn = document.getElementById(ids.btn);
+    const pane = document.getElementById(ids.pane);
+    if (key === tabKey) {
+      btn?.classList.add('active');
+      pane?.classList.add('active');
+    } else {
+      btn?.classList.remove('active');
+      pane?.classList.remove('active');
+    }
+  });
+}
+
+function requestSmartBinAction(binName, currentKg) {
+  switchCafeTab('pickup');
+  const weightInput = document.getElementById('pickupWeight');
+  if (weightInput) weightInput.value = Math.round(currentKg);
+
+  const notesText = document.getElementById('storageNotes');
+  if (notesText) notesText.value = `Penjemputan prioritas ${binName} (terisi ${currentKg} kg ampas kopi).`;
+
+  const binSel = document.getElementById('binSelection');
+  if (binSel) binSel.value = 'bin1';
+
+  const formEl = document.getElementById('pickup-schedule');
+  if (formEl) formEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  showToast(`Formulir penjemputan disiapkan otomatis untuk ${binName} (${currentKg} kg). Silakan tentukan tanggal & sesi.`, 'info');
+}
+
+function redeemCafeReward(rewardName, pointCost) {
+  const currentPts = appState.metrics.cafePoints || 3425;
+  if (currentPts < pointCost) {
+    showToast(`Poin Sirkula tidak mencukupi! Anda butuh ${pointCost.toLocaleString('id-ID')} poin (Saldo: ${currentPts.toLocaleString('id-ID')} poin).`, 'warning');
+    return;
+  }
+
+  appState.metrics.cafePoints = currentPts - pointCost;
+  updateAllMetricDisplays();
+
+  const detailEl = document.getElementById('cafeRewardPointsDetail');
+  if (detailEl) detailEl.textContent = appState.metrics.cafePoints.toLocaleString('id-ID');
+
+  const voucherCode = `SRK-REW-${Math.floor(1000 + Math.random() * 9000)}`;
+  triggerConfetti();
+  showToast(`Selamat! Berhasil menukarkan "${rewardName}". Kode Klaim: ${voucherCode}. Saldo tersisa: ${appState.metrics.cafePoints.toLocaleString('id-ID')} poin.`, 'success');
+}
+
+function requestSupplies(itemName) {
+  showToast(`Permintaan ${itemName} telah diterima tim operasional Bio-Hub. Akan dikirim bersama armada penjemputan berikutnya.`, 'success');
+}
+
+function downloadEsgReport() {
+  showToast('Memproses dan mengunduh Dokumen Laporan Kepatuhan ESG & Reduksi Emisi Kopi Titik Temu (PDF)...', 'success');
+}
+
+function copyVerificationLink() {
+  const url = 'https://sirkula.id/verify/SRK-UP-0881';
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(() => {
+      showToast('Tautan verifikasi keabsahan ESG berhasil disalin: ' + url, 'success');
+    }).catch(() => {
+      showToast('Tautan verifikasi: ' + url, 'info');
+    });
+  } else {
+    showToast('Tautan verifikasi: ' + url, 'info');
+  }
 }
 
 // Sub-Tab Switcher for Farmer Downstream Portal
 function switchFarmerTab(tabKey) {
   appState.activeFarmerTab = tabKey;
-  const fNavStore = document.getElementById('fNavStore');
-  const fNavCalc = document.getElementById('fNavCalc');
-  const paneStore = document.getElementById('farmerTabStore');
-  const paneCalc = document.getElementById('farmerTabCalc');
+  const tabMap = {
+    store: { btn: 'fNavStore', pane: 'farmerTabStore' },
+    calc: { btn: 'fNavCalc', pane: 'farmerTabCalc' },
+    iot: { btn: 'fNavIot', pane: 'farmerTabIot' },
+    buyback: { btn: 'fNavBuyback', pane: 'farmerTabBuyback' }
+  };
 
-  if (tabKey === 'store') {
-    fNavStore?.classList.add('active');
-    fNavCalc?.classList.remove('active');
-    paneStore?.classList.add('active');
-    paneCalc?.classList.remove('active');
+  Object.entries(tabMap).forEach(([key, ids]) => {
+    const btn = document.getElementById(ids.btn);
+    const pane = document.getElementById(ids.pane);
+    if (key === tabKey) {
+      btn?.classList.add('active');
+      pane?.classList.add('active');
+    } else {
+      btn?.classList.remove('active');
+      pane?.classList.remove('active');
+    }
+  });
+}
+
+// Navigate smoothly to target section, closing mobile drawer if open
+function navigateToSection(targetId) {
+  closeMobileNav();
+  const el = document.getElementById(targetId);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+// Toggle mobile navigation drawer
+function toggleMobileNav() {
+  const drawer = document.getElementById('mobileNavDrawer');
+  const icon = document.getElementById('mobileNavIcon');
+  if (!drawer) return;
+  const isOpen = drawer.classList.contains('open');
+  if (isOpen) {
+    drawer.classList.remove('open');
+    if (icon) {
+      icon.classList.remove('fa-xmark');
+      icon.classList.add('fa-bars');
+    }
   } else {
-    fNavCalc?.classList.add('active');
-    fNavStore?.classList.remove('active');
-    paneCalc?.classList.add('active');
-    paneStore?.classList.remove('active');
+    syncMobileNav();
+    drawer.classList.add('open');
+    if (icon) {
+      icon.classList.remove('fa-bars');
+      icon.classList.add('fa-xmark');
+    }
+  }
+}
+
+// Close mobile navigation drawer
+function closeMobileNav() {
+  const drawer = document.getElementById('mobileNavDrawer');
+  const icon = document.getElementById('mobileNavIcon');
+  if (drawer) drawer.classList.remove('open');
+  if (icon) {
+    icon.classList.remove('fa-xmark');
+    icon.classList.add('fa-bars');
+  }
+}
+
+// Synchronize mobile drawer links based on active role
+function syncMobileNav() {
+  const container = document.getElementById('mobileLinksGrid');
+  const label = document.getElementById('mobileRoleLabel');
+  if (!container) return;
+
+  const role = appState.activeRole || 'landing';
+  const roleNameMap = {
+    landing: 'Publik',
+    upstream: 'Kedai Kopi',
+    downstream: 'Petani Jamur',
+    biohub: 'Operator Bio-Hub'
+  };
+
+  if (label) label.textContent = roleNameMap[role] || 'Publik';
+
+  // Update quick chips
+  ['Landing', 'Upstream', 'Downstream', 'Biohub'].forEach(name => {
+    const chip = document.getElementById('mChip' + name);
+    if (chip) {
+      if (name.toLowerCase() === role) chip.classList.add('active');
+      else chip.classList.remove('active');
+    }
+  });
+
+  const linksByRole = {
+    landing: [
+      { id: 'circular-flow', icon: 'fa-arrows-spin', title: 'Alur Sirkular', desc: 'Rantai pasok ampas ke jamur' },
+      { id: 'impact-simulator', icon: 'fa-calculator', title: 'Kalkulator Formula', desc: 'Simulasi SCG-20 & uji lab' },
+      { id: 'mvp-digital', icon: 'fa-laptop-code', title: 'Fitur Unggulan', desc: 'Tinjauan modul B2B platform' },
+      { id: 'statsRibbon', icon: 'fa-chart-line', title: 'Metrik Ekosistem', desc: 'Telemetri emisi & baglog' }
+    ],
+    upstream: [
+      { tab: 'pickup', role: 'upstream', scroll: 'cafeTabPickup', icon: 'fa-truck-fast', title: 'Penjemputan EV', desc: 'Jadwal & pelacak armada real-time' },
+      { tab: 'bins', role: 'upstream', scroll: 'cafeTabBins', icon: 'fa-trash-can', title: 'Wadah Ampas', desc: 'Monitoring Smart Bin & SOP ampas' },
+      { tab: 'rewards', role: 'upstream', scroll: 'cafeTabRewards', icon: 'fa-coins', title: 'Eco-Points', desc: 'Katalog reward & tukar poin' },
+      { tab: 'esg', role: 'upstream', scroll: 'cafeTabEsg', icon: 'fa-award', title: 'Portofolio ESG', desc: 'Sertifikat & kit promosi hijau' }
+    ],
+    downstream: [
+      { tab: 'store', role: 'downstream', scroll: 'baglogStoreSection', icon: 'fa-box', title: 'Pesan Baglog', desc: 'Katalog grosir tersubsidi' },
+      { tab: 'calc', role: 'downstream', scroll: 'farmerTabCalc', icon: 'fa-scale-balanced', title: 'Kalkulator Panen', desc: 'Proyeksi omset & SOP garansi' },
+      { tab: 'iot', role: 'downstream', scroll: 'farmerTabIot', icon: 'fa-temperature-half', title: 'IoT Kumbung', desc: 'Pantau mikroklimat suhu/RH' },
+      { tab: 'buyback', role: 'downstream', scroll: 'farmerTabBuyback', icon: 'fa-timeline', title: 'Roadmap Th. 3', desc: 'Pilar rantai dingin serapan' }
+    ],
+    biohub: [
+      { id: 'fleet-map', icon: 'fa-truck-fast', title: 'Antrian Armada', desc: 'Inflow ampas mitra kedai' },
+      { id: 'reactor', icon: 'fa-fire', title: 'Reaktor Kiln', desc: 'Sterilisasi autoclave 121°C' },
+      { id: 'qa-lab', icon: 'fa-boxes-packing', title: 'Distribusi Baglog', desc: 'Outflow baglog ke kumbung' },
+      { id: 'esg-balance', icon: 'fa-chart-pie', title: 'Neraca Fasilitas', desc: 'Status batch & lab QA ISO' }
+    ]
+  };
+
+  const list = linksByRole[role] || linksByRole.landing;
+  container.innerHTML = list.map(item => {
+    let clickHandler = '';
+    if (item.action) {
+      clickHandler = `${item.action}(); closeMobileNav(); return false;`;
+    } else if (item.tab && item.role === 'upstream') {
+      clickHandler = `switchCafeTab('${item.tab}'); navigateToSection('${item.scroll}'); return false;`;
+    } else if (item.tab) {
+      clickHandler = `switchFarmerTab('${item.tab}'); navigateToSection('${item.scroll}'); return false;`;
+    } else {
+      clickHandler = `navigateToSection('${item.id}'); return false;`;
+    }
+
+    return `
+      <a href="#" class="mobile-nav-card" onclick="${clickHandler}">
+        <div class="m-card-icon"><i class="fa-solid ${item.icon}"></i></div>
+        <div class="m-card-info">
+          <strong>${item.title}</strong>
+          <small>${item.desc}</small>
+        </div>
+        <i class="fa-solid fa-chevron-right m-card-arrow"></i>
+      </a>
+    `;
+  }).join('');
+}
+
+// Handle hash routing on page load & hash changes
+function handleHashRoute() {
+  const hash = window.location.hash.replace('#', '');
+  if (!hash) return;
+  if (['upstream', 'downstream', 'biohub', 'landing', 'auth'].includes(hash)) {
+    switchRole(hash);
+  } else if (hash === 'iot-telemetry') {
+    switchRole('downstream', 'iot');
+  } else if (hash === 'buyback') {
+    switchRole('downstream', 'buyback');
+  } else if (hash === 'marketplace') {
+    switchRole('downstream', 'catalog');
+  } else if (hash === 'harvest-log') {
+    switchRole('downstream', 'calculator');
+  } else {
+    // Check if target element exists
+    const el = document.getElementById(hash);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+}
+
+// ==========================================================================
+// LANDING PAGE INTERACTIVE ESTIMATOR & FAQ
+// ==========================================================================
+
+// Switch between Cafe and Farmer tabs on the landing page calculator
+function switchLandingCalcTab(tabKey) {
+  const btnCafe = document.getElementById('calcTabCafe');
+  const btnFarmer = document.getElementById('calcTabFarmer');
+  const paneCafe = document.getElementById('calcPaneCafe');
+  const paneFarmer = document.getElementById('calcPaneFarmer');
+
+  if (tabKey === 'cafe') {
+    btnCafe?.classList.add('active');
+    btnFarmer?.classList.remove('active');
+    if (paneCafe) paneCafe.style.display = 'block';
+    if (paneFarmer) paneFarmer.style.display = 'none';
+  } else {
+    btnFarmer?.classList.add('active');
+    btnCafe?.classList.remove('active');
+    if (paneFarmer) paneFarmer.style.display = 'block';
+    if (paneCafe) paneCafe.style.display = 'none';
+  }
+}
+
+// Update Cafe Estimator results
+function updateLandingCafeCalc(kgDay) {
+  const kg = parseInt(kgDay, 10) || 15;
+  const disp = document.getElementById('landingCafeWasteDisplay');
+  if (disp) disp.textContent = `${kg} kg / hari (~${kg * 10} cup)`;
+
+  const totalWasteMonth = kg * 30;
+  const co2Prevented = Math.round(totalWasteMonth * 1.9);
+  const treeEquiv = Math.round(co2Prevented / 20);
+  const points = Math.round(totalWasteMonth * 5);
+
+  const elWaste = document.getElementById('resCafeTotalWaste');
+  const elCo2 = document.getElementById('resCafeCo2Prevented');
+  const elTree = document.getElementById('resCafeTreeEquiv');
+  const elPoints = document.getElementById('resCafePointsEarned');
+
+  if (elWaste) elWaste.textContent = `${totalWasteMonth.toLocaleString('id-ID')} kg`;
+  if (elCo2) elCo2.textContent = `${co2Prevented.toLocaleString('id-ID')} kg CO₂e`;
+  if (elTree) elTree.textContent = `Setara menanam ~${treeEquiv} pohon penyerap karbon`;
+  if (elPoints) elPoints.textContent = `${points.toLocaleString('id-ID')} Poin`;
+}
+
+// Update Farmer Estimator results
+function updateLandingFarmerCalc(qty) {
+  const count = parseInt(qty, 10) || 2000;
+  const disp = document.getElementById('landingFarmerBaglogDisplay');
+  if (disp) disp.textContent = `${count.toLocaleString('id-ID')} Baglog / Siklus`;
+
+  const saving = count * 500;
+  const yieldKg = Math.round(count * 0.45);
+  const revenue = Math.round(yieldKg * 15000);
+
+  const elSaving = document.getElementById('resFarmerSaving');
+  const elYield = document.getElementById('resFarmerYield');
+  const elRevenue = document.getElementById('resFarmerRevenue');
+
+  if (elSaving) elSaving.textContent = `Rp ${saving.toLocaleString('id-ID')}`;
+  if (elYield) elYield.textContent = `${yieldKg.toLocaleString('id-ID')} kg Jamur`;
+  if (elRevenue) elRevenue.textContent = `Rp ${revenue.toLocaleString('id-ID')}`;
+}
+
+// Toggle FAQ Accordion item
+function toggleFaq(faqId) {
+  const item = document.getElementById(faqId);
+  if (!item) return;
+  const wasActive = item.classList.contains('active');
+  document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+  if (!wasActive) {
+    item.classList.add('active');
   }
 }
 
@@ -280,33 +607,44 @@ function initAuthFromStorage() {
 
 /** Update navbar auth widget to reflect current auth state */
 function updateAuthNavbar(user) {
-  const btnLogin = document.getElementById('btnAuthLogin');
+  const targetUser = user || appState.authUser || DEMO_USERS[appState.activeRole] || DEMO_USERS.landing;
   const userPill = document.getElementById('authUserPill');
   const authName = document.getElementById('authName');
   const authRoleTag = document.getElementById('authRoleTag');
   const authAvatar = document.getElementById('authAvatar');
   const authDropdownName = document.getElementById('authDropdownName');
+  const authDropdownSub = document.getElementById('authDropdownSub');
 
-  if (user) {
-    if (btnLogin) btnLogin.style.display = 'none';
-    if (userPill) userPill.style.display = 'flex';
-    if (authName) authName.textContent = user.name;
-    if (authRoleTag) {
-      authRoleTag.textContent = user.roleLabel;
-      authRoleTag.className = 'auth-role-tag';
-      if (user.role === 'upstream') authRoleTag.classList.add('tag-upstream');
-      else if (user.role === 'downstream') authRoleTag.classList.add('tag-downstream');
-      else authRoleTag.classList.add('tag-biohub');
-    }
-    if (authAvatar) {
-      authAvatar.textContent = user.avatar;
-      authAvatar.style.background = user.avatarBg;
-    }
-    if (authDropdownName) authDropdownName.textContent = user.name;
-  } else {
-    if (btnLogin) btnLogin.style.display = 'flex';
-    if (userPill) userPill.style.display = 'none';
+  if (userPill) userPill.style.display = 'flex';
+  if (authName) authName.textContent = targetUser.name;
+  if (authRoleTag) {
+    authRoleTag.textContent = targetUser.roleLabel;
+    authRoleTag.className = 'auth-role-tag';
+    if (targetUser.role === 'upstream') authRoleTag.classList.add('tag-upstream');
+    else if (targetUser.role === 'downstream') authRoleTag.classList.add('tag-downstream');
+    else if (targetUser.role === 'biohub') authRoleTag.classList.add('tag-biohub');
+    else authRoleTag.classList.add('tag-landing');
   }
+  if (authAvatar) {
+    authAvatar.textContent = targetUser.avatar;
+    authAvatar.style.background = targetUser.avatarBg;
+  }
+  if (authDropdownName) authDropdownName.textContent = targetUser.name;
+  if (authDropdownSub) authDropdownSub.textContent = targetUser.subtitle;
+
+  // Sync active item highlight in dropdown
+  const menuItems = {
+    landing: document.getElementById('menuItemLanding'),
+    upstream: document.getElementById('menuItemUpstream'),
+    downstream: document.getElementById('menuItemDownstream'),
+    biohub: document.getElementById('menuItemBiohub')
+  };
+  Object.entries(menuItems).forEach(([key, btn]) => {
+    if (btn) {
+      if (key === targetUser.role) btn.classList.add('active');
+      else btn.classList.remove('active');
+    }
+  });
 }
 
 /** Open the auth modal */
@@ -516,7 +854,7 @@ function switchAuthPageTab(tab) {
     if (demoBanner) demoBanner.style.display = 'flex';
   } else if (tab === 'daftar') {
     if (titleEl) titleEl.textContent = 'Daftar Akun Mitra';
-    if (subEl) subEl.textContent = 'Mulai bergabung dalam ekosistem Sirkula secara gratis';
+    if (subEl) subEl.textContent = 'Mulai bergabung dalam ekosistem sirkular Sirkula';
     if (demoBanner) demoBanner.style.display = 'flex';
     // Init password strength
     const pwInput = document.getElementById('pageRegPassword');
@@ -1066,7 +1404,7 @@ function handleSupportTicket(e) {
   const issue = document.getElementById('ticketIssueType').value;
   const qty = document.getElementById('ticketQuantity').value;
 
-  showToast(`Tiket garansi tercatat: #${Math.floor(1000 + Math.random() * 9000)}. Tim teknis Sirkula akan mengirimkan ${qty} baglog pengganti gratis setelah verifikasi.`, 'success');
+  showToast(`Tiket garansi tercatat: #${Math.floor(1000 + Math.random() * 9000)}. Tim teknis Sirkula akan memverifikasi bukti foto dan memproses penggantian substrat sesuai SOP.`, 'success');
 
   const dropzoneText = document.getElementById('dropzoneText');
   if (dropzoneText) dropzoneText.textContent = 'Klik untuk pilih foto kumbung / baglog bermasalah';

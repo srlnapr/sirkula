@@ -99,8 +99,8 @@ export default function RoleSettingsModal() {
       tag: 'Downstream User',
       icon: 'fa-seedling',
       color: '#1B4D3E',
-      desc: 'Pengguna media tanam baglog terformulasi ampas kopi. Akses toko grosir, IoT kumbung, dan buyback hasil panen.',
-      highlights: ['Pesan Baglog Terformulasi', 'Telemetri Sensor Kumbung', 'Garansi & Jaminan Buyback']
+      desc: 'Pengguna media tanam baglog terformulasi ampas kopi. Akses toko grosir, monitoring IoT kumbung, dan roadmap buyback hasil panen (Tahun 3).',
+      highlights: ['Pesan Baglog Terformulasi', 'Telemetri Sensor Kumbung', 'Roadmap Buyback Tahun 3']
     },
     {
       key: 'biohub',

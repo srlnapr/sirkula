@@ -67,7 +67,7 @@ export default function TopNav() {
           <i className="fa-solid fa-scale-balanced" /> Catat Panen
         </a>
         <a href="#buyback" className="navbar-nav-link">
-          <i className="fa-solid fa-handshake" /> Buyback Jamur
+          <i className="fa-solid fa-timeline" /> Roadmap Th. 3 (Buyback)
         </a>
       </div>
     ),
@@ -138,7 +138,7 @@ export default function TopNav() {
             type="button"
             className="navbar-icon-circle-btn"
             title="Pusat Notifikasi Sistem"
-            onClick={() => showToast('Semua sensor IoT & logistik armada EV beroperasi normal', 'info')}
+            onClick={() => showToast('Monitoring sensor IoT kumbung & telemetri logistik beroperasi normal', 'info')}
           >
             <i className="fa-regular fa-bell" />
             <span className="notif-pulse-dot" />

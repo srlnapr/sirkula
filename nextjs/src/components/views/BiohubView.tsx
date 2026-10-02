@@ -467,12 +467,13 @@ export default function BiohubView() {
             </div>
             <div>
               <span className="csh-tag" style={{ color: '#3730A3' }}>
-                Dispatch &amp; Telemetri Kendaraan Listrik
+                Distribusi Terjadwal &amp; Transisi EV
               </span>
-              <h3 className="csh-title">Radar Armada EV &amp; Antrian Logistik</h3>
+              <h3 className="csh-title">Radar Armada Logistik &amp; Pemantauan Rute</h3>
               <p className="csh-subtitle">
-                Pantau posisi armada penjemput ampas kopi kedai dan distribusi baglog jamur ke kumbung
-                petani secara real-time.
+                Distribusi bertahap menggunakan kendaraan listrik sebagai bagian dari upaya menekan emisi dan
+                meningkatkan efisiensi operasional jangka panjang, didukung evaluasi biaya pengadaan unit,
+                biaya charging/listrik, pemeliharaan (maintenance), dan kesiapan infrastruktur charging pool.
               </p>
             </div>
           </div>
@@ -502,9 +503,9 @@ export default function BiohubView() {
             <span className="fss-sub">Inflow lancar ke Bio-Hub Lembang</span>
           </div>
           <div className="fss-item">
-            <span className="fss-lbl">Efisiensi Karbon Armada</span>
-            <span className="fss-val">100% Zero-Emission</span>
-            <span className="fss-sub">Armada Motor &amp; Van Listrik</span>
+            <span className="fss-lbl">Transisi Armada Berkelanjutan</span>
+            <span className="fss-val">Reduksi Emisi Bertahap</span>
+            <span className="fss-sub">Distribusi Terencana EV &amp; Evaluasi Konsumsi Daya</span>
           </div>
           <div className="fss-item">
             <span className="fss-lbl">Rata-rata Waktu Timbang</span>
@@ -678,7 +679,7 @@ export default function BiohubView() {
               className="partner-tier-badge"
               style={{ background: '#FFEDD5', color: '#9A3412', border: '1px solid #FED7AA' }}
             >
-              <i className="fa-solid fa-fire" /> Bahan Bakar: 100% Pelet Ampas Kopi Kering
+              <i className="fa-solid fa-fire" /> Bahan Bakar: Pelet Biomassa Ampas Kopi Kering
             </span>
           </div>
         </div>
@@ -832,8 +833,8 @@ export default function BiohubView() {
               </span>
               <h3 className="csh-title">Lab Kendali Mutu &amp; Standar Substrat SCG</h3>
               <p className="csh-subtitle">
-                Pemeriksaan ketat parameter C:N, pH, kadar air, dan kebersihan miselium F2 guna menjamin
-                garansi tumbuh 100% bagi petani jamur.
+                Pemeriksaan ketat parameter C:N, pH, kadar air, dan kebersihan miselium F2 guna menjaga
+                standar mutu dan garansi penggantian substrat bagi petani jamur.
               </p>
             </div>
           </div>
@@ -923,7 +924,7 @@ export default function BiohubView() {
               </span>
               <h3 className="csh-title">Neraca Massa &amp; Emisi Sirkular Fasilitas</h3>
               <p className="csh-subtitle">
-                Alur neraca tertutup (closed-loop) mengonversi 100% ampas kopi mentah menjadi biomassa media
+                Alur neraca tertutup (closed-loop) dirancang untuk mengonversi ampas kopi mentah menjadi biomassa media
                 tanam bernutrisi tinggi dan mencatat audit mitigasi metana.
               </p>
             </div>
@@ -1032,7 +1033,7 @@ export default function BiohubView() {
             </div>
             <div className="mbl-item">
               <span>Garansi Substrat Tumbuh:</span>
-              <strong style={{ color: '#059669' }}>100% Replace Guarantee</strong>
+              <strong style={{ color: '#059669' }}>Substrate Replace Guarantee</strong>
             </div>
             <div className="mbl-item">
               <span>Status Audit Fasilitas:</span>
